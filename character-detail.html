@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Details - Dng God</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="characters.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="edited new img/dng god jpg(1).jpg" alt="Dng God Logo" class="header-logo">
+                <h1>Dng God</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="tips.html">Tips</a></li>
+                <li><a href="characters.html">Characters</a></li>
+                <li><a href="pets.html">Pets</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 id="character-name">Character Name</h1>
+            <p>Detailed information about this character</p>
+        </div>
+
+        <section class="character-detail-section">
+            <div class="character-detail-container">
+                <div class="character-detail-image">
+                    <img id="character-image" src="" alt="Character Image">
+                </div>
+                <div class="character-detail-content">
+                    <h2>Character Overview</h2>
+                    <p id="character-description">Character description will be loaded here.</p>
+                    
+                    <h3>Ability</h3>
+                    <div class="ability-detail">
+                        <h4 id="ability-name">Ability Name</h4>
+                        <p id="ability-description">Ability description will be loaded here.</p>
+                        
+                        <div class="ability-stats">
+                            <div class="stat">
+                                <span class="stat-label">Cooldown:</span>
+                                <span id="ability-cooldown" class="stat-value">0s</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Duration:</span>
+                                <span id="ability-duration" class="stat-value">0s</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Type:</span>
+                                <span id="ability-type" class="stat-value">Loading...</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Effect:</span>
+                                <span id="ability-effect" class="stat-value">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>How to Use</h3>
+                    <p id="usage-tips">Usage tips will be loaded here.</p>
+                </div>
+            </div>
+            
+            <div class="character-navigation">
+                <button id="prev-character" class="nav-button">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <button id="next-character" class="nav-button">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Dng God. All rights reserved.</p>
+    </footer>
+
+    <style>
+        /* Add styles for the navigation buttons */
+        .character-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+        
+        .nav-button {
+            background-color: #4a4a4a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: #666;
+        }
+        
+        .nav-button i {
+            margin: 0 5px;
+        }
+        
+        #prev-character {
+            padding-left: 15px;
+        }
+        
+        #next-character {
+            padding-right: 15px;
+        }
+    </style>
+
+    <script>
+        // Get character ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const characterId = urlParams.get('id');
+        
+        console.log("Character ID from URL:", characterId);
+        console.log("All Characters:", allCharacters);
+        
+        // Function to load character details
+        function loadCharacterDetails() {
+            if (!characterId) {
+                console.log("No character ID found, redirecting to characters.html");
+                window.location.href = 'characters.html';
+                return;
+            }
+            
+            // Find the character in the allCharacters array
+            // First try to find by name (converted to URL-friendly format)
+            let character = allCharacters.find(c => 
+                c.name.toLowerCase().replace(/\s+/g, '-') === characterId
+            );
+            
+            console.log("Found character:", character);
+            
+            if (!character) {
+                console.log("Character not found, redirecting to characters.html");
+                window.location.href = 'characters.html';
+                return;
+            }
+            
+            // Update page title
+            document.title = `${character.name} - Character Details - Dng God`;
+            
+            // Update character name
+            document.getElementById('character-name').textContent = character.name;
+            
+            // Update character image
+            const characterImage = document.getElementById('character-image');
+            characterImage.src = character.image;
+            characterImage.alt = character.name;
+            
+            // Update character description
+            document.getElementById('character-description').textContent = character.description;
+            
+            // Update ability details
+            document.getElementById('ability-name').textContent = character.ability;
+            document.getElementById('ability-description').textContent = character.abilityDescription;
+            document.getElementById('ability-cooldown').textContent = character.cooldown;
+            document.getElementById('ability-duration').textContent = character.duration;
+            document.getElementById('ability-type').textContent = character.type;
+            
+            // Set ability effect based on character
+            let effectText = "Varies";
+            if (character.name === 'Chrono') {
+                effectText = "Blocks 600 damage";
+            } else if (character.name === 'Alok') {
+                effectText = "Restores 5 HP/s, +10% movement speed";
+            } else if (character.name === 'Kelly') {
+                effectText = "+6% movement speed";
+            } else if (character.name === 'K') {
+                effectText = "+50 max EP, converts EP to HP";
+            } else if (character.name === 'Dimitri') {
+                effectText = "Restores 3 HP/s, allows self-revive";
+            } else if (character.name === 'Jai') {
+                effectText = "Instant reload for pistols and shotguns";
+            } else if (character.name === 'Wukong') {
+                effectText = "Transforms into a bush";
+            } else if (character.name === 'A124') {
+                effectText = "Converts EP to HP, +10% movement speed";
+            } else if (character.name === 'Kla') {
+                effectText = "+100% damage with fists and melee weapons";
+            } else if (character.name === 'Kapella') {
+                effectText = "+10% healing effectiveness, +5 HP/s";
+            } else if (character.name === 'Andrew') {
+                effectText = "+8% armor durability";
+            } else if (character.name === 'Caroline') {
+                effectText = "+3% movement speed with shotguns";
+            } else if (character.name === 'Clu') {
+                effectText = "Reveals enemies within 50m";
+            } else if (character.name === 'Ford') {
+                effectText = "-6% damage taken when HP is low";
+            } else if (character.name === 'Hayato') {
+                effectText = "+7.5% armor penetration when HP is low";
+            } else if (character.name === 'Jota') {
+                effectText = "Restores 40 HP when using SMGs";
+            } else if (character.name === 'Laura') {
+                effectText = "+25% accuracy when scoped in";
+            } else if (character.name === 'Lila') {
+                effectText = "+5 HP restored when using healing items";
+            } else if (character.name === 'Maxim') {
+                effectText = "+15% eating and healing speed";
+            } else if (character.name === 'Misha') {
+                effectText = "+5% vehicle speed, -5% damage taken in vehicles";
+            } else if (character.name === 'Moco') {
+                effectText = "Tags enemies for 5s";
+            } else if (character.name === 'Nikita') {
+                effectText = "+20% reload speed for SMGs";
+            } else if (character.name === 'Notora') {
+                effectText = "Restores 5 HP/s to teammates in vehicles";
+            } else if (character.name === 'Paloma') {
+                effectText = "Can carry AR ammo without taking up inventory space";
+            } else if (character.name === 'Rafael') {
+                effectText = "Silenced when using snipers and marksman rifles";
+            } else if (character.name === 'Shirou') {
+                effectText = "Marks the first enemy that damages you";
+            } else if (character.name === 'Skyler') {
+                effectText = "Deploys a sonic wave that damages Gloo Walls";
+            } else if (character.name === 'Sophia') {
+                effectText = "Recovers EP when reviving teammates";
+            } else if (character.name === 'Steffie') {
+                effectText = "Creates graffiti that restores armor";
+            } else if (character.name === 'Thiva') {
+                effectText = "+5s revival time, restores 15 HP/s to revived teammate";
+            } else if (character.name === 'Wolfrahh') {
+                effectText = "Reduces damage taken from headshots";
+            } else if (character.name === 'Xayne') {
+                effectText = "Gains 50 temporary Shield Points for 12s, resets on knockdowns";
+            } else if (character.name === 'Alvaro') {
+                effectText = "+10% damage with grenades, -10% cooldown time";
+            } else if (character.name === 'Kairos') {
+                effectText = "-6% cooldown of character abilities";
+            }
+            
+            document.getElementById('ability-effect').textContent = effectText;
+            
+            // Update usage tips
+            document.getElementById('usage-tips').textContent = character.usageTips;
+            
+            // Set up navigation buttons
+            setupNavigation(character);
+        }
+        
+        // Function to set up navigation between characters
+        function setupNavigation(currentCharacter) {
+            const currentIndex = allCharacters.findIndex(c => c.name === currentCharacter.name);
+            
+            // Set up previous button
+            const prevButton = document.getElementById('prev-character');
+            if (currentIndex > 0) {
+                const prevCharacter = allCharacters[currentIndex - 1];
+                prevButton.addEventListener('click', () => {
+                    const prevCharacterId = prevCharacter.name.toLowerCase().replace(/\s+/g, '-');
+                    window.location.href = `character-detail.html?id=${prevCharacterId}`;
+                });
+            } else {
+                prevButton.disabled = true;
+                prevButton.style.opacity = '0.5';
+                prevButton.style.cursor = 'not-allowed';
+            }
+            
+            // Set up next button
+            const nextButton = document.getElementById('next-character');
+            if (currentIndex < allCharacters.length - 1) {
+                const nextCharacter = allCharacters[currentIndex + 1];
+                nextButton.addEventListener('click', () => {
+                    const nextCharacterId = nextCharacter.name.toLowerCase().replace(/\s+/g, '-');
+                    window.location.href = `character-detail.html?id=${nextCharacterId}`;
+                });
+            } else {
+                nextButton.disabled = true;
+                nextButton.style.opacity = '0.5';
+                nextButton.style.cursor = 'not-allowed';
+            }
+        }
+        
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', loadCharacterDetails);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dng God - Free Fire Tips & Tricks</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="characters.js" defer></script>
+    <script src="pets.js" defer></script>
+    <script src="script.js" defer></script>
+    <style>
+        /* Image transition effect styles */
+        .image-transition-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            perspective: 1000px;
+        }
+        
+        .transition-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(1.1) rotate(-2deg) translateZ(-100px);
+            filter: brightness(0.8) blur(5px);
+        }
+        
+        .transition-image.active {
+            opacity: 1;
+            transform: scale(1) rotate(0deg) translateZ(0);
+            filter: brightness(1) blur(0);
+        }
+
+        .transition-image.fade-out {
+            opacity: 0;
+            transform: scale(0.9) rotate(2deg) translateZ(100px);
+            filter: brightness(0.8) blur(5px);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-10px) rotate(1deg) scale(1.02); }
+            50% { transform: translateY(0px) rotate(0deg) scale(1); }
+            75% { transform: translateY(10px) rotate(-1deg) scale(0.98); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 5px 25px rgba(255, 77, 77, 0.5); }
+            100% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
+        }
+        
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .image-transition-container {
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        /* Dark mode styles */
+        :root {
+            --primary-color: #ff4d4d;
+            --secondary-color: #333;
+            --text-color: #333;
+            --bg-color: #fff;
+            --card-bg: #f5f5f5;
+            --header-bg: #fff;
+            --footer-bg: #333;
+            --footer-text: #fff;
+            --nav-link-color: #333;
+            --nav-link-hover: #ff4d4d;
+            --section-bg: #f9f9f9;
+            --border-color: #ddd;
+        }
+        
+        [data-theme="dark"] {
+            --primary-color: #ff6b6b;
+            --secondary-color: #222;
+            --text-color: #f5f5f5;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --header-bg: #1a1a1a;
+            --footer-bg: #1a1a1a;
+            --footer-text: #f5f5f5;
+            --nav-link-color: #f5f5f5;
+            --nav-link-hover: #ff6b6b;
+            --section-bg: #1a1a1a;
+            --border-color: #333;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        header {
+            background-color: var(--header-bg);
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links a {
+            color: var(--nav-link-color);
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--nav-link-hover);
+        }
+        
+        .tip-card, .character-card, .pet-card {
+            background-color: var(--card-bg);
+            transition: background-color 0.3s;
+        }
+        
+        .about-section, .tips-section, .characters-section, .pets-section, .contact-section {
+            background-color: var(--section-bg);
+            transition: background-color 0.3s;
+        }
+        
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            transition: background-color 0.3s, color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="edited new img/dng god jpg(1).jpg" alt="Dng God Logo" class="header-logo">
+                <h1>Dng God</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="tips.html">Tips</a></li>
+                <li><a href="characters.html">Characters</a></li>
+                <li><a href="weapons.html">Weapons</a></li>
+                <li><a href="pets.html">Pets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1> Master Free Fire</h1>
+                <h2>with</h2>
+                <h1>Dng God</h1>
+                <p>Your ultimate source for Free Fire tips, tricks, and strategies</p>
+                <a href="#about" class="cta-button">Get Started</a>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2>About Dng God</h2>
+                    <p>Welcome to Dng God, your ultimate destination for Free Fire gaming excellence. We are passionate about helping players improve their skills, understand game mechanics, and dominate the battlefield.</p>
+                    
+                    <h3>Our Mission</h3>
+                    <p>Our mission is to provide comprehensive, accurate, and up-to-date information about Free Fire characters, pets, weapons, and strategies. Whether you're a beginner looking to improve or a veteran seeking advanced techniques, Dng God has something for everyone.</p>
+                    
+                    <h3>What We Offer</h3>
+                    <ul>
+                        <li><strong>Character Guides:</strong> Detailed information about all Free Fire characters, their abilities, and how to use them effectively.</li>
+                        <li><strong>Pet Companions:</strong> Learn about the various pets available in Free Fire and how they can enhance your gameplay.</li>
+                        <li><strong>Pro Tips & Strategies:</strong> Expert advice on improving your aim, survival skills, team coordination, and map knowledge.</li>
+                        <li><strong>Regular Updates:</strong> Stay informed about the latest Free Fire updates, new characters, pets, and game changes.</li>
+                    </ul>
+                    
+                    <h3>Our Team</h3>
+                    <p>Dng God is run by a team of dedicated Free Fire enthusiasts with years of experience in the game. We combine our passion for gaming with our expertise to bring you the most valuable content.</p>
+                </div>
+                <div class="about-image">
+                    <div class="image-transition-container">
+                        <img src="edited new img/dng god jpg(2).jpg" alt="Dng God img preview" class="transition-image active float" id="dng-god-img">
+                        <img src="edited new img/Free fire logo.jpg" alt="free fire logo" class="transition-image" id="free-fire-logo">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tips" class="tips-section">
+            <h2>Pro Tips & Strategies</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-crosshairs"></i>
+                    <h3>Aim Training</h3>
+                    <p>Master your aim with these essential training techniques</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Survival Tips</h3>
+                    <p>Learn how to survive longer in intense battles</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Team Strategies</h3>
+                    <p>Coordinate with your squad for victory</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Map Knowledge</h3>
+                    <p>Master the best landing spots and rotations</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="characters" class="characters-section">
+            <div class="container">
+                <h2>Featured Characters</h2>
+                <p>Discover some of our favorite Free Fire characters</p>
+                <div id="home-characters-container" class="character-grid">
+                    <!-- Random characters will be loaded here -->
+                </div>
+                <div class="section-footer">
+                    <a href="characters.html" class="btn">View All Characters</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="pets" class="pets-section">
+            <div class="container">
+                <h2>Featured Pets</h2>
+                <p>Discover some of our favorite Free Fire pets</p>
+                <div id="home-pets-container" class="pets-grid">
+                    <!-- Random pets will be loaded here -->
+                </div>
+                <div class="section-footer">
+                    <a href="pets.html" class="btn">View All Pets</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>Connect With Us</h2>
+            <div class="social-links">
+                <a href="https://youtube.com/@dnggod?si=64otld4xcsLrO_Gx" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+            </div>
+            <div class="email-contact">
+                <a href="mailto:dnggodofficial@gmail.com" class="email-link">
+                    <i class="fas fa-envelope"></i>
+                    dnggodofficial@gmail.com
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Dng God. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            handleMissingImages();
+            handleScrollAnimations();
+            initImageTransition();
+        });
+
+        function initImageTransition() {
+            const images = document.querySelectorAll('.transition-image');
+            let currentIndex = 0;
+            
+            function transitionImages() {
+                // Add a random rotation and scale for more dynamic transitions
+                const randomRotate = Math.random() * 4 - 2; // Random rotation between -2 and 2 degrees
+                const randomScale = 0.95 + Math.random() * 0.1; // Random scale between 0.95 and 1.05
+                
+                // Remove active class from current image
+                images[currentIndex].classList.remove('active');
+                images[currentIndex].classList.add('fade-out');
+                images[currentIndex].style.transform = `scale(${randomScale}) rotate(${randomRotate}deg) translateZ(100px)`;
+                
+                // Wait for fade out animation
+                setTimeout(() => {
+                    images[currentIndex].classList.remove('fade-out');
+                    images[currentIndex].style.transform = '';
+                    
+                    // Move to next image
+                    currentIndex = (currentIndex + 1) % images.length;
+                    
+                    // Add active class to new image with random initial transform
+                    const newRandomRotate = Math.random() * 4 - 2;
+                    const newRandomScale = 0.95 + Math.random() * 0.1;
+                    images[currentIndex].style.transform = `scale(${newRandomScale}) rotate(${newRandomRotate}deg) translateZ(-100px)`;
+                    images[currentIndex].classList.add('active');
+                }, 1500);
+            }
+            
+            // Start the transition cycle
+            setInterval(transitionImages, 4000);
+        }
+    </script>
+</body>
+</html> 

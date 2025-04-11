@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Details - Dng God</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="pets.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="edited new img/dng god jpg(1).jpg" alt="Dng God Logo" class="header-logo">
+                <h1>Dng God</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="tips.html">Tips</a></li>
+                <li><a href="characters.html">Characters</a></li>
+                <li><a href="pets.html">Pets</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 id="pet-name">Pet Name</h1>
+            <p>Detailed information about this pet</p>
+        </div>
+
+        <section class="pet-detail-section">
+            <div class="pet-detail-container">
+                <div class="pet-detail-image">
+                    <img id="pet-image" src="" alt="Pet Image">
+                </div>
+                <div class="pet-detail-content">
+                    <h2>Pet Overview</h2>
+                    <p id="pet-description">Pet description will be loaded here.</p>
+                    
+                    <h3>Ability</h3>
+                    <div class="ability-detail">
+                        <h4 id="ability-name">Ability Name</h4>
+                        <p id="ability-description">Ability description will be loaded here.</p>
+                        
+                        <div class="ability-stats">
+                            <div class="stat">
+                                <span class="stat-label">Cooldown:</span>
+                                <span id="ability-cooldown" class="stat-value">0s</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Duration:</span>
+                                <span id="ability-duration" class="stat-value">0s</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>How to Use</h3>
+                    <p id="usage-tips">Usage tips will be loaded here.</p>
+                </div>
+            </div>
+            
+            <div class="pet-navigation">
+                <button id="prev-pet" class="nav-button">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <button id="next-pet" class="nav-button">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Dng God. All rights reserved.</p>
+    </footer>
+
+    <style>
+        /* Add styles for the navigation buttons */
+        .pet-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+        
+        .nav-button {
+            background-color: #4a4a4a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: #666;
+        }
+        
+        .nav-button i {
+            margin: 0 5px;
+        }
+        
+        #prev-pet {
+            padding-left: 15px;
+        }
+        
+        #next-pet {
+            padding-right: 15px;
+        }
+    </style>
+
+    <script>
+        // Get pet ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const petId = urlParams.get('id');
+        
+        console.log("Pet ID from URL:", petId);
+        console.log("All Pets:", allPets);
+        
+        // Function to load pet details
+        function loadPetDetails() {
+            if (!petId) {
+                console.log("No pet ID found, redirecting to pets.html");
+                window.location.href = 'pets.html';
+                return;
+            }
+            
+            // Find the pet in the allPets array
+            // First try to find by name (converted to URL-friendly format)
+            let pet = allPets.find(p => 
+                p.name.toLowerCase().replace(/\s+/g, '-') === petId
+            );
+            
+            console.log("Found pet:", pet);
+            
+            if (!pet) {
+                console.log("Pet not found, redirecting to pets.html");
+                window.location.href = 'pets.html';
+                return;
+            }
+            
+            // Update page title
+            document.title = `${pet.name} - Pet Details - Dng God`;
+            
+            // Update pet name
+            document.getElementById('pet-name').textContent = pet.name;
+            
+            // Update pet image
+            const petImage = document.getElementById('pet-image');
+            petImage.src = pet.image;
+            petImage.alt = pet.name;
+            
+            // Update pet description
+            document.getElementById('pet-description').textContent = pet.description;
+            
+            // Update ability details
+            document.getElementById('ability-name').textContent = pet.ability;
+            document.getElementById('ability-description').textContent = pet.abilityDescription;
+            document.getElementById('ability-cooldown').textContent = pet.cooldown;
+            document.getElementById('ability-duration').textContent = pet.duration;
+            
+            // Update usage tips
+            document.getElementById('usage-tips').textContent = pet.usageTips;
+            
+            // Set up navigation buttons
+            setupNavigation(pet);
+        }
+        
+        // Function to set up navigation between pets
+        function setupNavigation(currentPet) {
+            const currentIndex = allPets.findIndex(p => p.name === currentPet.name);
+            
+            // Set up previous button
+            const prevButton = document.getElementById('prev-pet');
+            if (currentIndex > 0) {
+                const prevPet = allPets[currentIndex - 1];
+                prevButton.addEventListener('click', () => {
+                    const prevPetId = prevPet.name.toLowerCase().replace(/\s+/g, '-');
+                    window.location.href = `pet-detail.html?id=${prevPetId}`;
+                });
+            } else {
+                prevButton.disabled = true;
+                prevButton.style.opacity = '0.5';
+                prevButton.style.cursor = 'not-allowed';
+            }
+            
+            // Set up next button
+            const nextButton = document.getElementById('next-pet');
+            if (currentIndex < allPets.length - 1) {
+                const nextPet = allPets[currentIndex + 1];
+                nextButton.addEventListener('click', () => {
+                    const nextPetId = nextPet.name.toLowerCase().replace(/\s+/g, '-');
+                    window.location.href = `pet-detail.html?id=${nextPetId}`;
+                });
+            } else {
+                nextButton.disabled = true;
+                nextButton.style.opacity = '0.5';
+                nextButton.style.cursor = 'not-allowed';
+            }
+        }
+        
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', loadPetDetails);
+    </script>
+</body>
+</html> 

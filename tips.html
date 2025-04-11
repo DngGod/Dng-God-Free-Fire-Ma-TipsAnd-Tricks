@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Tips - Dng God</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js" defer></script>
+    <script src="characters.js" defer></script>
+    <style>
+        .tips-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .tips-section {
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tips-section h2 {
+            color: #ff6b00;
+            margin-top: 0;
+            border-bottom: 2px solid #ff6b00;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tips-section h2 i {
+            margin-right: 10px;
+        }
+        
+        .tip-card {
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tip-card h3 {
+            color: #ff9d00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tip-card h3 i {
+            margin-right: 10px;
+            color: #ff6b00;
+        }
+        
+        .tip-card p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+        
+        .tip-nav-button {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .tip-nav-button:hover, .tip-nav-button.active {
+            background-color: #ff6b00;
+        }
+        
+        .tip-category {
+            display: none;
+        }
+        
+        .tip-category.active {
+            display: block;
+        }
+        
+        .tip-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .tip-video {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .tip-note {
+            background-color: #4a4a4a;
+            border-left: 4px solid #ff6b00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tip-warning {
+            background-color: #4a4a4a;
+            border-left: 4px solid #ff0000;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tip-success {
+            background-color: #4a4a4a;
+            border-left: 4px solid #00ff00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .tips-container {
+                padding: 10px;
+            }
+            
+            .tips-section {
+                padding: 15px;
+            }
+            
+            .tip-card {
+                padding: 15px;
+            }
+        }
+        
+        /* Enhanced Character Combinations Styles */
+        .skill-combo-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .skill-combo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 107, 0, 0.3);
+            padding-bottom: 15px;
+        }
+        
+        .skill-combo-header h2 {
+            color: #ff9d00;
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-combo-header h2 i {
+            margin-right: 12px;
+            color: #ff6b00;
+        }
+        
+        .mode-selector {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            padding: 8px;
+            display: inline-flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mode-button {
+            background: none;
+            border: none;
+            color: #e0e0e0;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+        }
+        
+        .mode-button.active {
+            background: linear-gradient(45deg, #ff6b00, #ff9d00);
+            color: white;
+            box-shadow: 0 2px 10px rgba(255, 107, 0, 0.3);
+        }
+        
+        .mode-button:hover:not(.active) {
+            background: rgba(255, 107, 0, 0.2);
+            color: #ff9d00;
+        }
+        
+        .skill-combo-container {
+            display: none;
+        }
+        
+        .skill-combo-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .skill-combo-card {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-combo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b00, #ff9d00, #ff6b00);
+            background-size: 200% 100%;
+            animation: gradient-shift 3s linear infinite;
+        }
+        
+        .skill-combo-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.2);
+            border-color: rgba(255, 107, 0, 0.5);
+        }
+        
+        .skill-combo-title {
+            color: #ff9d00;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-combo-title i {
+            margin-right: 10px;
+            color: #ff6b00;
+        }
+        
+        .skill-combo-description {
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .character-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .character-item {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .character-item:hover {
+            background: rgba(0, 0, 0, 0.6);
+            transform: translateY(-3px) scale(1.02);
+            border-color: rgba(255, 107, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.2);
+        }
+        
+        .character-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            border: 3px solid #ff6b00;
+            box-shadow: 0 3px 10px rgba(255, 107, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .character-image:hover {
+            transform: scale(1.1) rotate(5deg);
+            border-color: #ff9d00;
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.5);
+        }
+        
+        .character-info {
+            flex: 1;
+        }
+        
+        .character-name {
+            color: #ff9d00;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .character-ability {
+            color: #e0e0e0;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .skill-combo-tips {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid #ff6b00;
+        }
+        
+        .skill-combo-tips h4 {
+            color: #ff9d00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-combo-tips ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .skill-combo-tips li {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .skill-combo-tips li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #ff6b00;
+        }
+        
+        .skill-combo-tips .highlight {
+            color: #ff9d00;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .character-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .character-item {
+                padding: 15px;
+            }
+            
+            .character-image {
+                width: 60px;
+                height: 60px;
+            }
+        }
+        
+        /* Enhanced Modal Styles */
+        .character-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border: 2px solid rgba(255, 107, 0, 0.3);
+            animation: modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes modalFadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #ff6b00;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .close-modal:hover {
+            color: #ff9d00;
+            background: rgba(255, 107, 0, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .modal-character-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 25px;
+            border: 4px solid #ff6b00;
+            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-character-image:hover {
+            transform: scale(1.05) rotate(5deg);
+            border-color: #ff9d00;
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.6);
+        }
+        
+        .modal-character-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-character-image:hover img {
+            transform: scale(1.1);
+        }
+        
+        .modal-character-name {
+            color: #ff9d00;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+        
+        .modal-character-ability {
+            color: #e0e0e0;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .modal-character-description {
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 16px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            border-left: 4px solid #ff6b00;
+        }
+        
+        .modal-ability-details {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-ability-name {
+            color: #ff9d00;
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-ability-description {
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .modal-ability-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .modal-stat-item {
+            background: rgba(255, 107, 0, 0.15);
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            border-radius: 8px;
+            padding: 12px 20px;
+            color: #e0e0e0;
+            font-size: 15px;
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-stat-item:hover {
+            background: rgba(255, 107, 0, 0.25);
+            border-color: rgba(255, 107, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .modal-stat-item strong {
+            color: #ff9d00;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .modal-usage-tips {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+            border-left: 4px solid #ff6b00;
+        }
+        
+        .modal-usage-tips h4 {
+            color: #ff9d00;
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-usage-tips p {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 20px;
+            }
+            
+            .modal-character-image {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .modal-character-name {
+                font-size: 28px;
+            }
+            
+            .modal-character-ability {
+                font-size: 18px;
+            }
+            
+            .modal-ability-stats {
+                flex-direction: column;
+            }
+            
+            .modal-stat-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+            <img src="edited new img/dng god jpg(1).jpg" alt="Dng God Logo" class="header-logo">
+            <h1>Dng God</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="tips.html" class="active">Tips</a></li>
+                <li><a href="characters.html">Characters</a></li>
+                <li><a href="weapons.html">Weapons</a></li>
+                <li><a href="pets.html">Pets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero tips-hero">
+            <div class="hero-content">
+                <h1>Free Fire Tips & Strategies</h1>
+                <p>Master the game with our expert tips and strategies</p>
+        </div>
+        </section>
+
+        <div class="tips-container">
+            <div class="tips-navigation">
+                <button class="tip-nav-button active" data-target="general-tips">General Tips</button>
+                <button class="tip-nav-button" data-target="character-combos">Character Combos</button>
+                <button class="tip-nav-button" data-target="weapon-tips">Weapon Tips</button>
+                <button class="tip-nav-button" data-target="map-tips">Map Tips</button>
+                <button class="tip-nav-button" data-target="advanced-tips">Advanced Tips</button>
+            </div>
+
+            <!-- Character Skill Combinations Section -->
+            <section id="character-combos" class="skill-combo-section">
+                <div class="skill-combo-header">
+                    <h2><i class="fas fa-users"></i> Best Character Skill Combinations</h2>
+                    <div class="mode-selector">
+                        <button class="mode-button active" data-mode="br">BR Ranked</button>
+                        <button class="mode-button" data-mode="cs">CS Ranked</button>
+                    </div>
+                </div>
+                
+                <!-- BR Ranked Combinations -->
+                <div id="br-combos" class="skill-combo-container active">
+                    <div class="skill-combo-card">
+                        <h3 class="skill-combo-title"><i class="fas fa-crown"></i> BR Mode Squad Composition</h3>
+                        <p class="skill-combo-description">Optimal character combinations for Battle Royale ranked mode based on roles.</p>
+                        
+                        <div class="character-list">
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Tatsuya.png" alt="Tatsuya">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Tatsuya</div>
+                                    <div class="character-ability">Rusher</div>
+                                </div>
+                            </div>
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Xayne.png" alt="Xayne">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Xayne</div>
+                                    <div class="character-ability">Rusher</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-combo-tips">
+                            <h4>Rusher Role:</h4>
+                            <ul>
+                                <li>Use <span class="highlight">Tatsuya</span> or <span class="highlight">Xayne</span> as your squad's rusher</li>
+                                <li>These characters excel at aggressive gameplay and initiating team fights</li>
+                                <li>Perfect for players who prefer close combat and high mobility</li>
+                        </ul>
+                        </div>
+                    </div>
+
+                    <div class="skill-combo-card">
+                        <h3 class="skill-combo-title"><i class="fas fa-heartbeat"></i> Support Role</h3>
+                        <p class="skill-combo-description">Characters that provide healing and support to the team.</p>
+                        
+                        <div class="character-list">
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Dimitri.png" alt="Dimitri">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Dimitri</div>
+                                    <div class="character-ability">Healing Heartbeat</div>
+                                </div>
+                            </div>
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Kassie.png" alt="Kassie">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Kassie</div>
+                                    <div class="character-ability">Meow Meow</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-combo-tips">
+                            <h4>Support Role:</h4>
+                            <ul>
+                                <li>Use <span class="highlight">Dimitri</span> or <span class="highlight">Kassie</span> as your squad's support</li>
+                                <li>These characters provide healing and utility to keep your team alive</li>
+                                <li>Essential for maintaining team sustainability during long matches</li>
+                        </ul>
+                        </div>
+                    </div>
+
+                    <div class="skill-combo-card">
+                        <h3 class="skill-combo-title"><i class="fas fa-crosshairs"></i> Sniper Role</h3>
+                        <p class="skill-combo-description">Characters specialized for long-range combat and precision.</p>
+                        
+                        <div class="character-list">
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Iris.png" alt="Iris">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Iris</div>
+                                    <div class="character-ability">Healing Wave</div>
+                                </div>
+                            </div>
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Skyler.png" alt="Skyler">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Skyler</div>
+                                    <div class="character-ability">Sonic Wave</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-combo-tips">
+                            <h4>Sniper Role:</h4>
+                            <ul>
+                                <li>Use <span class="highlight">Iris</span> or <span class="highlight">Skyler</span> as your squad's sniper</li>
+                                <li>These characters excel at long-range combat and precision shots</li>
+                                <li>Perfect for players who prefer to engage from a safe distance</li>
+                        </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-combo-card">
+                        <h3 class="skill-combo-title"><i class="fas fa-rifle"></i> Rifleman Role</h3>
+                        <p class="skill-combo-description">Characters specialized for medium-range combat and versatility.</p>
+                        
+                        <div class="character-list">
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Chrono.png" alt="Chrono">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Chrono</div>
+                                    <div class="character-ability">Time Turner</div>
+                                </div>
+                            </div>
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Clu.png" alt="Clu">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Clu</div>
+                                    <div class="character-ability">Tracing Steps</div>
+                                </div>
+                </div>
+            </div>
+                        
+                        <div class="skill-combo-tips">
+                            <h4>Rifleman Role:</h4>
+                            <ul>
+                                <li>Use <span class="highlight">Chrono</span> or <span class="highlight">Clu</span> as your squad's rifleman</li>
+                                <li>These characters provide a balance of offense and defense</li>
+                                <li>Versatile characters that can adapt to various combat situations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CS Ranked Combinations -->
+                <div id="cs-combos" class="skill-combo-container">
+                    <div class="skill-combo-card">
+                        <h3 class="skill-combo-title"><i class="fas fa-bolt"></i> CS Mode Squad Composition</h3>
+                        <p class="skill-combo-description">Optimal character combinations for Clash Squad ranked mode based on roles.</p>
+                        
+                        <div class="character-list">
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Xayne.png" alt="Xayne">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Xayne</div>
+                                    <div class="character-ability">Rusher</div>
+                                </div>
+                            </div>
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Tatsuya.png" alt="Tatsuya">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Tatsuya</div>
+                                    <div class="character-ability">Rusher</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-combo-tips">
+                            <h4>Rusher Role:</h4>
+                            <ul>
+                                <li>Use <span class="highlight">Xayne</span> or <span class="highlight">Tatsuya</span> as your squad's rusher</li>
+                                <li>These characters excel at aggressive gameplay and initiating team fights</li>
+                                <li>Perfect for players who prefer close combat and high mobility</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-combo-card">
+                        <h3 class="skill-combo-title"><i class="fas fa-heartbeat"></i> Support Role</h3>
+                        <p class="skill-combo-description">Characters that provide healing and support to the team.</p>
+                        
+                        <div class="character-list">
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Kassie.png" alt="Kassie">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Kassie</div>
+                                    <div class="character-ability">Meow Meow</div>
+                                </div>
+                            </div>
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Dimitri.png" alt="Dimitri">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Dimitri</div>
+                                    <div class="character-ability">Healing Heartbeat</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-combo-tips">
+                            <h4>Support Role:</h4>
+                            <ul>
+                                <li>Use <span class="highlight">Kassie</span> or <span class="highlight">Dimitri</span> as your squad's support</li>
+                                <li>These characters provide healing and utility to keep your team alive</li>
+                                <li>Essential for maintaining team sustainability during intense rounds</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-combo-card">
+                        <h3 class="skill-combo-title"><i class="fas fa-bomb"></i> Nader Role</h3>
+                        <p class="skill-combo-description">Characters specialized for grenade and explosive combat.</p>
+                        
+                        <div class="character-list">
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/A124.png" alt="A124">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">A124</div>
+                                    <div class="character-ability">Thrill of Battle</div>
+                                </div>
+                            </div>
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Steffie.png" alt="Steffie">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Steffie</div>
+                                    <div class="character-ability">Painted Refuge</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-combo-tips">
+                            <h4>Nader Role:</h4>
+                            <ul>
+                                <li>Use <span class="highlight">A124</span> or <span class="highlight">Steffie</span> as your squad's nader</li>
+                                <li>These characters excel at controlling areas with grenades and explosives</li>
+                                <li>Perfect for players who prefer tactical gameplay and area denial</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-combo-card">
+                        <h3 class="skill-combo-title"><i class="fas fa-crosshairs"></i> Sniper Role</h3>
+                        <p class="skill-combo-description">Characters specialized for long-range combat and precision.</p>
+                        
+                        <div class="character-list">
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Skyler.png" alt="Skyler">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Skyler</div>
+                                    <div class="character-ability">Sonic Wave</div>
+                                </div>
+                            </div>
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Wukong.png" alt="Wukong">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Wukong</div>
+                                    <div class="character-ability">Camouflage</div>
+                                </div>
+                            </div>
+                            <div class="character-item">
+                                <div class="character-image">
+                                    <img src="img of png/Jai.png" alt="Jai">
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Jai</div>
+                                    <div class="character-ability">Hearing</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-combo-tips">
+                            <h4>Sniper Role:</h4>
+                            <ul>
+                                <li>Use <span class="highlight">Skyler</span> or <span class="highlight">Wukong</span> as your squad's sniper</li>
+                                <li>When using <span class="highlight">Wukong</span>, pair with <span class="highlight">Jai</span> for enhanced stealth capabilities</li>
+                                <li>These characters excel at long-range combat and precision shots</li>
+                                <li>Perfect for players who prefer to engage from a safe distance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- General Tips Section -->
+            <section id="general-tips" class="tips-section">
+                <h2><i class="fas fa-lightbulb"></i> Getting Started</h2>
+                <!-- Content removed as requested -->
+            </section>
+
+            <!-- Character Tips Section -->
+            <section id="character-tips" class="tips-section">
+                    <h2><i class="fas fa-user"></i> Character Selection</h2>
+                    <div class="tip-card">
+                        <h3><i class="fas fa-random"></i> Choosing the Right Character</h3>
+                        <p>Selecting the right character for your playstyle is crucial:</p>
+                        <ul>
+                            <li><span class="highlight">Chrono</span> is great for aggressive players who need protection</li>
+                            <li><span class="highlight">Alok</span> is perfect for support players who want to heal teammates</li>
+                            <li><span class="highlight">Kelly</span> is ideal for players who rely on movement and speed</li>
+                            <li><span class="highlight">K</span> is excellent for players who want to manage EP and HP effectively</li>
+                            <li><span class="highlight">Dimitri</span> is great for team players who want to provide healing zones</li>
+                        </ul>
+                        <div class="tip-note">
+                            <p><strong>Pro Tip:</strong> Try different characters to find one that matches your playstyle.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-bolt"></i> Ability Usage</h3>
+                        <p>Knowing when and how to use character abilities is key:</p>
+                        <ul>
+                            <li>Use <span class="highlight">active abilities</span> at the right moment for maximum impact</li>
+                            <li>Save abilities for <span class="highlight">critical situations</span> rather than using them immediately</li>
+                            <li>Coordinate ability usage with your <span class="highlight">teammates</span> for combo effects</li>
+                            <li>Be aware of ability <span class="highlight">cooldowns</span> and plan accordingly</li>
+                            <li>Use abilities to <span class="highlight">counter</span> enemy abilities</li>
+                        </ul>
+                        <div class="tip-warning">
+                            <p><strong>Warning:</strong> Don't waste your abilities when they're not needed. Save them for when they can make a real difference.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-sync-alt"></i> Character Combinations</h3>
+                        <p>Some characters work better together than others:</p>
+                        <ul>
+                            <li><span class="highlight">Alok + Chrono</span>: Great for aggressive pushes with healing and protection</li>
+                            <li><span class="highlight">Kelly + Caroline</span>: Excellent for fast-paced gameplay with shotguns</li>
+                            <li><span class="highlight">K + Kapella</span>: Powerful combination for EP management and healing</li>
+                            <li><span class="highlight">Dimitri + Moco</span>: Strong for team support with healing and enemy tracking</li>
+                            <li><span class="highlight">Wukong + Clu</span>: Effective for stealth gameplay with camouflage and enemy detection</li>
+                        </ul>
+                        <div class="tip-success">
+                            <p><strong>Success Tip:</strong> Discuss character selection with your team to ensure a balanced composition.</p>
+                        </div>
+                    </div>
+
+                Robo</span> is excellent for players who use Gloo Walls frequently</li>
+                        </ul>
+                        <div class="tip-note">
+                            <p><strong>Pro Tip:</strong> Match your pet's ability with your character's playstyle for maximum effectiveness.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-sync"></i> Pet Ability Usage</h3>
+                        <p>Understanding how to maximize your pet's abilities:</p>
+                        <ul>
+                            <li>Be aware of pet ability <span class="highlight">cooldowns</span> and plan accordingly</li>
+                            <li>Use pet abilities to <span class="highlight">complement</span> your character's abilities</li>
+                            <li>Some pet abilities are <span class="highlight">passive</span> and don't require activation</li>
+                            <li>Coordinate pet abilities with your <span class="highlight">teammates</span> for team benefits</li>
+                            <li>Upgrade your pets to <span class="highlight">increase</span> their ability effectiveness</li>
+                        </ul>
+                        <div class="tip-warning">
+                            <p><strong>Warning:</strong> Don't forget to equip your pet before starting a match!</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-level-up-alt"></i> Pet Upgrades</h3>
+                        <p>Upgrading your pets can significantly improve their abilities:</p>
+                        <ul>
+                            <li>Use <span class="highlight">pet food</span> to level up your pets</li>
+                            <li>Higher level pets have <span class="highlight">stronger abilities</span></li>
+                            <li>Some pets have <span class="highlight">special abilities</span> that unlock at higher levels</li>
+                            <li>Focus on upgrading pets that <span class="highlight">complement</span> your main character</li>
+                            <li>Consider upgrading <span class="highlight">multiple pets</span> for different situations</li>
+                        </ul>
+                        <div class="tip-success">
+                            <p><strong>Success Tip:</strong> A fully upgraded pet can provide significant advantages in combat.</p>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- Pet Tips Section -->
+            <section id="pet-tips" class="tips-section">
+                    <h2><i class="fas fa-paw"></i> Pet Selection</h2>
+                    <div class="tip-card">
+                        <h3><i class="fas fa-search"></i> Choosing the Right Pet</h3>
+                        <p>Selecting the right pet to complement your character is important:</p>
+                        <ul>
+                            <li><span class="highlight">Ottero</span> is great for characters who use healing items frequently</li>
+                            <li><span class="highlight">Night Panther</span> is perfect for players who need extra inventory space</li>
+                            <li><span class="highlight">Detective Panda</span> is ideal for aggressive players who get eliminations</li>
+                            <li><span class="highlight">Shiba</span> is useful for finding mushrooms on the map</li>
+                            <li><span class="highlight">="highlight">secondary weapon</span> (sniper, marksman rifle) for long-range combat</li>
+                            <li>Consider a <span class="highlight">pistol</span> as a backup weapon</li>
+                            <li>Match weapons to your character's <span class="highlight">abilities</span> (e.g., Kelly with shotguns)</li>
+                            <li>Balance your loadout for different <span class="highlight">combat scenarios</span></li>
+                        </ul>
+                        <div class="tip-note">
+                            <p><strong>Pro Tip:</strong> Different weapons have different recoil patterns. Practice with your preferred weapons to master their recoil.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-bullseye"></i> Weapon Attachments</h3>
+                        <p>Using the right attachments can significantly improve your weapon's performance:</p>
+                        <ul>
+                            <li><span class="highlight">Scopes</span> improve accuracy at different ranges</li>
+                            <li><span class="highlight">Muzzles</span> reduce recoil and improve accuracy</li>
+                            <li><span class="highlight">Magazines</span> increase ammo capacity and reload speed</li>
+                            <li><span class="highlight">Foregrips</span> reduce recoil and improve stability</li>
+                            <li><span class="highlight">Stocks</span> improve movement while aiming</li>
+                        </ul>
+                        <div class="tip-warning">
+                            <p><strong>Warning:</strong> Some attachments may not be compatible with all weapons. Check compatibility before equipping.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-exchange-alt"></i> Weapon Switching</h3>
+                        <p>Knowing when to switch weapons is crucial for survival:</p>
+                        <ul>
+                            <li>Switch to your <span class="highlight">secondary weapon</span> when out of ammo in your primary</li>
+                            <li>Use <span class="highlight">shotguns</span> for close-range combat</li>
+                            <li>Use <span class="highlight">snipers</span> for long-range engagements</li>
+                            <li>Switch to <span class="highlight">pistols</span> when both primary and secondary are empty</li>
+                            <li>Consider switching weapons based on the <span class="highlight">enemy's armor</span> type</li>
+                        </ul>
+                        <div class="tip-success">
+                            <p><strong>Success Tip:</strong> Practice quick weapon switching to minimize downtime in combat.</p>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- Combat Tips Section -->
+            <section id="combat-tips" class="tips-section">
+                    <h2><i class="fas fa-fist-raised"></i> Combat Strategies</h2>
+                    <div class="tip-card">
+                        <h3><i class="fas fa-shield-alt"></i> Positioning</h3>
+                        <p>Good positioning is key to winning gunfights:</p>
+                        <ul>
+                            <li>Use <span class="highlight">cover</span> to protect yourself from enemy fire</li>
+                            <li>Stay <span class="highlight">mobile</span> to avoid being an easy target</li>
+                            <li>Use <span class="highlight">high ground</span> for better visibility and shooting angles</li>
+                            <li>Avoid staying in <span class="highlight">open areas</span> for too long</li>
+                            <li>Use <span class="highlight">Gloo Walls</span> strategically to create cover</li>
+                        </ul>
+                        <div class="tip-note">
+                            <p><strong>Pro Tip:</strong> Always be aware of your surroundings and potential escape routes.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-crosshairs"></i> Aiming Techniques</h3>
+                        <p>Improving your aim can significantly increase your chances of winning:</p>
+                        <ul>
+                            <li>Practice <span class="highlight">headshots</span> for maximum damage</li>
+                            <li>Use <span class="highlight">tap firing</span> for better accuracy at medium to long range</li>
+                            <li>Control <span class="highlight">recoil</span> by pulling down while firing</li>
+                            <li>Use <span class="highlight">peek shooting</span> to minimize exposure</li>
+                            <li>Pre-aim around <span class="highlight">corners</span> to be ready for enemies</li>
+                        </ul>
+                        <div class="tip-warning">
+                            <p><strong>Warning:</strong> Don't spray and pray. Controlled bursts are more effective than continuous fire.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-users"></i> Team Combat</h3>
+                        <p>Coordinating with your team during combat is essential:</p>
+                        <ul>
+                            <li>Stick together but maintain <span class="highlight">spacing</span> to avoid being wiped by grenades</li>
+                            <li>Use <span class="highlight">pincer attacks</span> to flank enemies</li>
+                            <li>Coordinate <span class="highlight">ability usage</span> with your team</li>
+                            <li>Call out <span class="highlight">enemy positions</span> and movements</li>
+                            <li>Share <span class="highlight">resources</span> and <span class="highlight">ammo</span> with teammates</li>
+                        </ul>
+                        <div class="tip-success">
+                            <p><strong>Success Tip:</strong> A well-coordinated team can defeat even the most skilled individual players.</p>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- Survival Tips Section -->
+            <section id="survival-tips" class="tips-section">
+                    <h2><i class="fas fa-heartbeat"></i> Survival Strategies</h2>
+                    <div class="tip-card">
+                        <h3><i class="fas fa-parachute"></i> Landing Strategy</h3>
+                        <p>Choosing the right landing spot can set you up for success:</p>
+                        <ul>
+                            <li>Choose <span class="highlight">high-loot areas</span> if you're confident in your combat skills</li>
+                            <li>Land in <span class="highlight">less popular areas</span> for a slower start but better survival chances</li>
+                            <li>Consider the <span class="highlight">safe zone</span> location when choosing where to land</li>
+                            <li>Land near <span class="highlight">vehicles</span> for quick rotations</li>
+                            <li>Coordinate landing spots with your <span class="highlight">team</span></li>
+                        </ul>
+                        <div class="tip-note">
+                            <p><strong>Pro Tip:</strong> If you're landing in a popular area, be ready to fight immediately upon landing.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-first-aid"></i> Resource Management</h3>
+                        <p>Managing your resources effectively is crucial for survival:</p>
+                        <ul>
+                            <li>Prioritize <span class="highlight">healing items</span> and <span class="highlight">armor</span> over ammo</li>
+                            <li>Keep a balanced amount of <span class="highlight">different ammo types</span></li>
+                            <li>Use <span class="highlight">grenades</span> strategically rather than hoarding them</li>
+                            <li>Share <span class="highlight">resources</span> with teammates who need them</li>
+                            <li>Loot <span class="highlight">eliminated enemies</span> quickly but safely</li>
+                        </ul>
+                        <div class="tip-warning">
+                            <p><strong>Warning:</strong> Don't carry too much of one ammo type. Balance your inventory for different situations.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-running"></i> Rotation Strategy</h3>
+                        <p>Knowing when and how to rotate is essential for survival:</p>
+                        <ul>
+                            <li>Plan your <span class="highlight">rotations</span> based on the safe zone location</li>
+                            <li>Use <span class="highlight">vehicles</span> for quick and safe rotations</li>
+                            <li>Avoid rotating through <span class="highlight">open areas</span> when possible</li>
+                            <li>Rotate <span class="highlight">early</span> to avoid being caught by the safe zone</li>
+                            <li>Use <span class="highlight">Gloo Walls</span> to create cover during rotations</li>
+                        </ul>
+                        <div class="tip-success">
+                            <p><strong>Success Tip:</strong> Good rotation strategy can often be more important than combat skills for reaching the final circles.</p>
+                        </div>
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Dng God. All rights reserved.</p>
+    </footer>
+
+    <!-- Character Modal -->
+    <div id="characterModal" class="character-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-character-image">
+                <img id="modalCharacterImage" src="" alt="Character Image">
+            </div>
+            <h2 id="modalCharacterName" class="modal-character-name">Character Name</h2>
+            <p id="modalCharacterAbility" class="modal-character-ability">Ability Name</p>
+            <p id="modalCharacterDescription" class="modal-character-description">Character description will be loaded here.</p>
+            
+            <div class="modal-ability-details">
+                <h3 id="modalAbilityName" class="modal-ability-name">Ability Name</h3>
+                <p id="modalAbilityDescription" class="modal-ability-description">Ability description will be loaded here.</p>
+                
+                <div class="modal-ability-stats">
+                    <div class="modal-stat-item">
+                        <strong>Type:</strong> <span id="modalAbilityType">Active/Passive</span>
+                    </div>
+                    <div class="modal-stat-item">
+                        <strong>Cooldown:</strong> <span id="modalAbilityCooldown">Cooldown time</span>
+                    </div>
+                    <div class="modal-stat-item">
+                        <strong>Duration:</strong> <span id="modalAbilityDuration">Duration time</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-usage-tips">
+                <h4>Usage Tips</h4>
+                <p id="modalUsageTips">Usage tips will be loaded here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to switch between tip categories
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.tip-nav-button');
+            const tipCategories = document.querySelectorAll('section[id$="-tips"], section#character-combos');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons and categories
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    tipCategories.forEach(category => category.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show corresponding category
+                    const categoryId = this.getAttribute('data-target');
+                    document.getElementById(categoryId).classList.add('active');
+                });
+            });
+            
+            // Function to switch between BR and CS modes
+            const modeButtons = document.querySelectorAll('.mode-button');
+            const modeContainers = document.querySelectorAll('.skill-combo-container');
+            
+            modeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons and containers
+                    modeButtons.forEach(btn => btn.classList.remove('active'));
+                    modeContainers.forEach(container => container.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show corresponding container
+                    const modeId = this.getAttribute('data-mode') + '-combos';
+                    document.getElementById(modeId).classList.add('active');
+                });
+            });
+            
+            // Character modal functionality
+            const modal = document.getElementById('characterModal');
+            const closeBtn = document.querySelector('.close-modal');
+            const characterImages = document.querySelectorAll('.character-image');
+            
+            // Close modal when clicking the X button
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside of it
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Add click event to all character images
+            characterImages.forEach(image => {
+                console.log('Adding click event to character image:', image);
+                image.addEventListener('click', function() {
+                    // Get the character name from the alt attribute of the img element inside the character-image div
+                    const characterName = this.querySelector('img').getAttribute('alt');
+                    console.log('Clicked character name:', characterName);
+                    showCharacterDetails(characterName);
+                });
+            });
+            
+            // Function to show character details in the modal
+            function showCharacterDetails(characterName) {
+                console.log('Looking for character:', characterName);
+                console.log('Available characters:', allCharacters);
+                // Find the character data from the allCharacters array
+                const character = allCharacters.find(char => char.name === characterName);
+                console.log('Found character:', character);
+                
+                if (character) {
+                    // Update modal content with character data
+                    document.getElementById('modalCharacterImage').src = character.image;
+                    document.getElementById('modalCharacterName').textContent = character.name;
+                    document.getElementById('modalCharacterAbility').textContent = character.ability;
+                    document.getElementById('modalCharacterDescription').textContent = character.description;
+                    document.getElementById('modalAbilityName').textContent = character.ability;
+                    document.getElementById('modalAbilityDescription').textContent = character.abilityDescription;
+                    document.getElementById('modalAbilityType').textContent = character.type.charAt(0).toUpperCase() + character.type.slice(1);
+                    document.getElementById('modalAbilityCooldown').textContent = character.cooldown;
+                    document.getElementById('modalAbilityDuration').textContent = character.duration;
+                    document.getElementById('modalUsageTips').textContent = character.usageTips;
+                    
+                    // Show the modal
+                    modal.style.display = 'block';
+                } else {
+                    console.error('Character not found:', characterName);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
