@@ -53,6 +53,7 @@ body {
     background-attachment: fixed;
     position: relative;
     transition: background 0.3s ease, color 0.3s ease;
+    padding-top: 70px; /* Adjust this value based on your header height */
 }
 
 body::before {
@@ -96,14 +97,21 @@ body::before {
 
 /* Header and Navigation */
 header {
-    background-color: var(--header-bg);
-    padding: 1rem 0;
     position: fixed;
-    width: 100%;
     top: 0;
+    width: 100%;
+    background-color: var(--header-bg);
+    transition: transform 0.3s ease;
     z-index: 1000;
-    box-shadow: 0 2px 10px var(--shadow-color);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    padding: 10px 0;
+}
+
+header.hide {
+    transform: translateY(-100%);
+}
+
+header.show {
+    transform: translateY(0);
 }
 
 nav {
@@ -1488,4 +1496,58 @@ img:not(.header-logo):not(.transition-image) {
     -webkit-user-select: auto;
     -moz-user-select: auto;
     -ms-user-select: auto;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--nav-link-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Mobile menu */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg);
+    padding: 10px;
+    z-index: 999;
+}
+
+.mobile-nav.active {
+    display: block;
+}
+
+.mobile-nav a {
+    display: block;
+    padding: 10px;
+    color: var(--nav-link-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Make header more compact on mobile */
+@media (max-width: 768px) {
+    header {
+        padding: 5px 0;
+    }
+    
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
 } 

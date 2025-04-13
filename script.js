@@ -238,6 +238,47 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Header scroll behavior
+let lastScroll = 0;
+const header = document.querySelector('header');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > lastScroll) {
+        // Scrolling down
+        header.classList.add('hide');
+    } else {
+        // Scrolling up
+        header.classList.remove('hide');
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Mobile menu functionality
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const mobileNav = document.querySelector('.mobile-nav');
+
+mobileMenuBtn.addEventListener('click', () => {
+    mobileNav.classList.toggle('active');
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!mobileMenuBtn.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('active');
+    }
+});
+
+// Close mobile menu when clicking a link
+const mobileLinks = document.querySelectorAll('.mobile-nav a');
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+    });
+});
+
 // Initialize the website
 document.addEventListener('DOMContentLoaded', () => {
     // Add scroll event listener for animations

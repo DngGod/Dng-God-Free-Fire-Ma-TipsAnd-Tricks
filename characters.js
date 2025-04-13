@@ -4,7 +4,7 @@ const allCharacters = [
         name: 'Tatsuya',
         ability: 'Dash',
         description: 'Dashes forward at a rapid speed',
-        image: 'img of png/Tatsuya.png',
+        image: 'edited new img/Tatsuya.jpg',
         type: 'active',
         abilityDescription: 'Dashes forward at a rapid speed for 0.3 sec. This skill can be accumulated for up to 2 uses, with a 5s cooldown between each use. Dash replenish time: 60s.',
         cooldown: '60s',
