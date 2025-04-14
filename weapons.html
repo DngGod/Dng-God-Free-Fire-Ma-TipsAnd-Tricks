@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dng God - Free Fire Weapons</title>
+    <title>Free Fire Weapons - Dng God</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -22,7 +25,7 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="tips.html">Tips</a></li>
                 <li><a href="characters.html">Characters</a></li>
-                <li><a href="weapons.html">Weapons</a></li>
+                <li><a href="weapons.html" class="active">Weapons</a></li>
                 <li><a href="pets.html">Pets</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -32,83 +35,122 @@
             <a href="about.html">About</a>
             <a href="tips.html">Tips</a>
             <a href="characters.html">Characters</a>
-            <a href="weapons.html">Weapons</a>
+            <a href="weapons.html" class="active">Weapons</a>
             <a href="pets.html">Pets</a>
             <a href="#contact">Contact</a>
         </div>
     </header>
 
+    <!-- AdSense Header Ad (Sticky) -->
+    <div class="ad-container header-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+             data-ad-slot="YOUR_HEADER_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <main>
-        <section class="hero weapons-hero">
-            <div class="hero-content">
-                <h1>Free Fire Weapons</h1>
-                <p>Discover and master the arsenal of Free Fire weapons</p>
-            </div>
+        <section class="page-header">
+            <h1>Free Fire Weapons</h1>
+            <p>Master every weapon in Free Fire</p>
         </section>
 
-        <section class="weapon-tips">
-            <div class="container">
-                <h2>Weapon Tips & Strategies</h2>
-                <div class="tips-grid">
-                    <div class="tip-card">
-                        <i class="fas fa-crosshairs"></i>
-                        <h3>Recoil Control</h3>
-                        <p>Master weapon recoil patterns for better accuracy</p>
-                    </div>
-                    <div class="tip-card">
-                        <i class="fas fa-bullseye"></i>
-                        <h3>Weapon Selection</h3>
-                        <p>Choose the right weapon for each situation</p>
-                    </div>
-                    <div class="tip-card">
-                        <i class="fas fa-sync"></i>
-                        <h3>Reload Timing</h3>
-                        <p>Learn when to reload and when to switch weapons</p>
-                    </div>
-                    <div class="tip-card">
-                        <i class="fas fa-bolt"></i>
-                        <h3>Fire Rate Control</h3>
-                        <p>Control your fire rate for maximum efficiency</p>
-                    </div>
+        <!-- AdSense Sidebar Ad (Desktop Only) -->
+        <div class="sidebar-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                 data-ad-slot="YOUR_SIDEBAR_AD_SLOT"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- AdSense Content Ad 1 (Above Content) -->
+        <div class="ad-container content-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                 data-ad-slot="YOUR_CONTENT_AD_SLOT_1"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <section class="weapons-section">
+            <div class="filter-container">
+                <input type="text" id="weaponSearch" placeholder="Search weapons..." class="search-input">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="assault">Assault</button>
+                    <button class="filter-btn" data-filter="sniper">Sniper</button>
+                    <button class="filter-btn" data-filter="shotgun">Shotgun</button>
+                    <button class="filter-btn" data-filter="smg">SMG</button>
                 </div>
+            </div>
+
+            <!-- AdSense In-Content Ad 1 -->
+            <div class="ad-container in-content-ad">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_IN_CONTENT_AD_SLOT_1"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div class="weapon-grid">
+                <!-- Weapon cards will be added dynamically with JavaScript -->
+            </div>
+
+            <!-- AdSense In-Content Ad 2 -->
+            <div class="ad-container in-content-ad">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_IN_CONTENT_AD_SLOT_2"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         </section>
     </main>
 
+    <!-- AdSense Footer Ad (Sticky) -->
+    <div class="ad-container footer-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+             data-ad-slot="YOUR_FOOTER_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About Dng God</h3>
-                <p>Your ultimate guide to Free Fire characters, weapons, and pets. Stay updated with the latest information and strategies.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="characters.html">Characters</a></li>
-                    <li><a href="weapons.html">Weapons</a></li>
-                    <li><a href="pets.html">Pets</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Connect With Us</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="https://youtube.com/@dnggod?si=64otld4xcsLrO_Gx"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Dng God. All rights reserved.</p>
+        <p>&copy; 2025 Dng God. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
         </div>
     </footer>
-
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <button class="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
     </button>
-
-    <script src="script.js"></script>
 </body>
 </html> 

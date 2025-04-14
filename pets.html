@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dng God - Free Fire Pets</title>
+    <title>Free Fire Pets - Dng God</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID" crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
     <script src="pets.js" defer></script>
 </head>
@@ -25,7 +27,7 @@
                 <li><a href="tips.html">Tips</a></li>
                 <li><a href="characters.html">Characters</a></li>
                 <li><a href="weapons.html">Weapons</a></li>
-                <li><a href="pets.html">Pets</a></li>
+                <li><a href="pets.html" class="active">Pets</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -35,29 +37,116 @@
             <a href="tips.html">Tips</a>
             <a href="characters.html">Characters</a>
             <a href="weapons.html">Weapons</a>
-            <a href="pets.html">Pets</a>
+            <a href="pets.html" class="active">Pets</a>
             <a href="#contact">Contact</a>
         </div>
     </header>
 
+    <!-- AdSense Header Ad (Sticky) -->
+    <div class="ad-container header-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+             data-ad-slot="YOUR_HEADER_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <main>
         <section class="page-header">
             <h1>Free Fire Pets</h1>
-            <p>Explore all pets and their unique abilities</p>
+            <p>Discover and master all Free Fire pets</p>
         </section>
+
+        <!-- AdSense Sidebar Ad (Desktop Only) -->
+        <div class="sidebar-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                 data-ad-slot="YOUR_SIDEBAR_AD_SLOT"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- AdSense Content Ad 1 (Above Content) -->
+        <div class="ad-container content-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                 data-ad-slot="YOUR_CONTENT_AD_SLOT_1"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
 
         <section class="pets-section">
             <div class="filter-container">
                 <input type="text" id="petSearch" placeholder="Search pets..." class="search-input">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="passive">Passive</button>
+                </div>
             </div>
-            <div class="pets-grid">
+
+            <!-- AdSense In-Content Ad 1 -->
+            <div class="ad-container in-content-ad">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_IN_CONTENT_AD_SLOT_1"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div class="pet-grid">
                 <!-- Pet cards will be added dynamically with JavaScript -->
+            </div>
+
+            <!-- AdSense In-Content Ad 2 -->
+            <div class="ad-container in-content-ad">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_IN_CONTENT_AD_SLOT_2"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         </section>
     </main>
 
+    <!-- AdSense Footer Ad (Sticky) -->
+    <div class="ad-container footer-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+             data-ad-slot="YOUR_FOOTER_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <footer>
         <p>&copy; 2025 Dng God. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
     </footer>
     <button class="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>

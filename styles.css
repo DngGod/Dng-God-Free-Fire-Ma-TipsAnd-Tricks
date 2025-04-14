@@ -1747,4 +1747,97 @@ img:not(.header-logo):not(.transition-image) {
     .pet-ability-stats {
         grid-template-columns: 1fr;
     }
+}
+
+/* Ad Container Styles */
+.ad-container {
+    margin: 20px auto;
+    max-width: 1200px;
+    text-align: center;
+    background: transparent;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.header-ad {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(42, 42, 42, 0.95);
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+}
+
+.content-ad {
+    margin: 30px auto;
+    padding: 15px;
+    background: rgba(42, 42, 42, 0.5);
+    border-radius: 8px;
+}
+
+.footer-ad {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    background: rgba(42, 42, 42, 0.95);
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+}
+
+/* Sidebar Ad */
+.sidebar-ad {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
+    z-index: 99;
+}
+
+/* In-Content Ad */
+.in-content-ad {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(42, 42, 42, 0.3);
+    border-radius: 8px;
+}
+
+/* Responsive Ad Styles */
+@media (max-width: 768px) {
+    .header-ad {
+        position: relative;
+        top: 0;
+    }
+    
+    .footer-ad {
+        position: relative;
+        bottom: 0;
+    }
+    
+    .sidebar-ad {
+        display: none;
+    }
+    
+    .ad-container {
+        margin: 15px auto;
+        padding: 8px;
+    }
+}
+
+/* Ensure ads don't affect layout */
+ins.adsbygoogle {
+    display: block !important;
+    margin: 0 auto;
+}
+
+/* Ad Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.ad-container {
+    animation: fadeIn 0.5s ease-in;
 } 
