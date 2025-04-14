@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://dnggod.com/sitemap.xml
+Sitemap: https://dnggod.github.io/sitemap.xml
 
 # Disallow specific paths (if needed)
 # Disallow: /private/
@@ -22,4 +22,4 @@ Allow: /*.png$
 Allow: /*.gif$
 
 # Host directive (optional)
-# Host: dnggod.com 
+# Host: dnggod.github.io 
