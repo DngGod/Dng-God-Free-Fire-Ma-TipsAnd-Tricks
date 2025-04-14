@@ -91,6 +91,9 @@
     <footer>
         <p>&copy; 2025 Dng God. All rights reserved.</p>
     </footer>
+    <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <style>
         /* Add styles for the back button */
@@ -335,6 +338,12 @@
             
             // Set up navigation buttons
             setupNavigation(character);
+            
+            // Add keyboard navigation
+            setupKeyboardNavigation(character);
+            
+            // Add touch swipe navigation
+            setupSwipeNavigation();
         }
         
         // Function to set up navigation between characters
@@ -346,8 +355,7 @@
             if (currentIndex > 0) {
                 const prevCharacter = allCharacters[currentIndex - 1];
                 prevButton.addEventListener('click', () => {
-                    const prevCharacterId = prevCharacter.name.toLowerCase().replace(/\s+/g, '-');
-                    window.location.href = `character-detail.html?id=${prevCharacterId}`;
+                    navigateToCharacter(prevCharacter);
                 });
             } else {
                 prevButton.disabled = true;
@@ -360,8 +368,7 @@
             if (currentIndex < allCharacters.length - 1) {
                 const nextCharacter = allCharacters[currentIndex + 1];
                 nextButton.addEventListener('click', () => {
-                    const nextCharacterId = nextCharacter.name.toLowerCase().replace(/\s+/g, '-');
-                    window.location.href = `character-detail.html?id=${nextCharacterId}`;
+                    navigateToCharacter(nextCharacter);
                 });
             } else {
                 nextButton.disabled = true;
@@ -370,8 +377,75 @@
             }
         }
         
+        // Function to navigate to a specific character
+        function navigateToCharacter(character) {
+            const characterId = character.name.toLowerCase().replace(/\s+/g, '-');
+            window.location.href = `character-detail.html?id=${characterId}`;
+        }
+        
+        // Function to set up keyboard navigation
+        function setupKeyboardNavigation(currentCharacter) {
+            document.addEventListener('keydown', (event) => {
+                const currentIndex = allCharacters.findIndex(c => c.name === currentCharacter.name);
+                
+                if (event.key === 'ArrowLeft' && currentIndex > 0) {
+                    // Navigate to previous character
+                    const prevCharacter = allCharacters[currentIndex - 1];
+                    navigateToCharacter(prevCharacter);
+                } else if (event.key === 'ArrowRight' && currentIndex < allCharacters.length - 1) {
+                    // Navigate to next character
+                    const nextCharacter = allCharacters[currentIndex + 1];
+                    navigateToCharacter(nextCharacter);
+                }
+            });
+        }
+        
+        // Function to set up touch swipe navigation
+        function setupSwipeNavigation() {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            const characterDetailSection = document.querySelector('.character-detail-section');
+            
+            characterDetailSection.addEventListener('touchstart', (event) => {
+                touchStartX = event.changedTouches[0].screenX;
+            }, false);
+            
+            characterDetailSection.addEventListener('touchend', (event) => {
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                const currentIndex = allCharacters.findIndex(c => 
+                    c.name.toLowerCase().replace(/\s+/g, '-') === characterId
+                );
+                
+                if (touchEndX < touchStartX - 50) {
+                    // Swipe left - go to next character
+                    if (currentIndex < allCharacters.length - 1) {
+                        const nextCharacter = allCharacters[currentIndex + 1];
+                        navigateToCharacter(nextCharacter);
+                    }
+                } else if (touchEndX > touchStartX + 50) {
+                    // Swipe right - go to previous character
+                    if (currentIndex > 0) {
+                        const prevCharacter = allCharacters[currentIndex - 1];
+                        navigateToCharacter(prevCharacter);
+                    }
+                }
+            }
+        }
+        
         // Call the function when the page loads
         document.addEventListener('DOMContentLoaded', loadCharacterDetails);
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme toggle
+            initThemeToggle();
+        });
     </script>
 </body>
 </html> 

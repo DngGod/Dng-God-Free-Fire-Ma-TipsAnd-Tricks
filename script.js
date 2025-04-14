@@ -279,6 +279,268 @@ mobileLinks.forEach(link => {
     });
 });
 
+// Header Navigation with Keyboard and Touch Events
+function initHeaderNavigation() {
+    const header = document.querySelector('header');
+    const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
+    let currentIndex = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isNavigating = false;
+
+    // Function to get current page index
+    function getCurrentPageIndex() {
+        const currentPath = window.location.pathname;
+        const currentHash = window.location.hash;
+        
+        for (let i = 0; i < navLinks.length; i++) {
+            const link = navLinks[i];
+            const href = link.getAttribute('href');
+            
+            if (currentPath.endsWith(href) || (currentHash && href === currentHash)) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    // Initialize current index
+    currentIndex = getCurrentPageIndex();
+
+    // Function to handle navigation
+    function navigate(direction) {
+        if (isNavigating) return;
+        isNavigating = true;
+
+        if (direction === 'next') {
+            currentIndex = (currentIndex + 1) % navLinks.length;
+        } else {
+            currentIndex = (currentIndex - 1 + navLinks.length) % navLinks.length;
+        }
+        
+        const targetLink = navLinks[currentIndex];
+        const href = targetLink.getAttribute('href');
+        
+        // Show navigation feedback
+        showFeedback(direction);
+        
+        // Add a small delay before navigation
+        setTimeout(() => {
+            if (href.startsWith('#')) {
+                // Scroll to section
+                const targetSection = document.querySelector(href);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    history.pushState(null, '', href);
+                }
+            } else {
+                // Navigate to page
+                window.location.href = href;
+            }
+            
+            // Reset navigation lock after a delay
+            setTimeout(() => {
+                isNavigating = false;
+            }, 1000);
+        }, 300);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        // Only handle arrow keys when not in input fields
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        
+        if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            navigate('next');
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            navigate('prev');
+        }
+    });
+
+    // Touch navigation
+    let touchStartTime = 0;
+    header.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartTime = e.timeStamp;
+    });
+
+    header.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const touchEndTime = e.timeStamp;
+        const touchDuration = touchEndTime - touchStartTime;
+        
+        // Only handle swipes that are quick enough
+        if (touchDuration < 300) {
+            handleSwipe();
+        }
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50; // Minimum distance for swipe
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swiped left
+                navigate('next');
+            } else {
+                // Swiped right
+                navigate('prev');
+            }
+        }
+    }
+
+    // Add visual feedback for navigation
+    function addNavigationFeedback() {
+        const feedback = document.createElement('div');
+        feedback.className = 'navigation-feedback';
+        feedback.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        `;
+        document.body.appendChild(feedback);
+        return feedback;
+    }
+
+    const feedback = addNavigationFeedback();
+
+    // Show navigation feedback
+    function showFeedback(direction) {
+        const targetLink = navLinks[direction === 'next' ? 
+            (currentIndex + 1) % navLinks.length : 
+            (currentIndex - 1 + navLinks.length) % navLinks.length];
+        
+        const pageName = targetLink.textContent.trim();
+        feedback.textContent = direction === 'next' ? `→ ${pageName}` : `← ${pageName}`;
+        feedback.style.opacity = '1';
+        
+        setTimeout(() => {
+            feedback.style.opacity = '0';
+        }, 500);
+    }
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', () => {
+        currentIndex = getCurrentPageIndex();
+    });
+}
+
+// Enhanced Mobile Swipe Navigation
+function initMobileSwipeNavigation() {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    let isScrolling = false;
+    const swipeThreshold = 100; // Increased threshold for better swipe detection
+    const verticalThreshold = 50; // Increased vertical threshold to better distinguish from scrolling
+
+    // Only add swipe navigation on mobile devices
+    if (window.innerWidth > 768) return;
+
+    document.addEventListener('touchstart', (e) => {
+        // Don't handle swipe if mobile menu is open
+        if (document.querySelector('.mobile-nav.active')) return;
+        
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isScrolling = false;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+        touchEndY = e.changedTouches[0].screenY;
+        const verticalDiff = Math.abs(touchEndY - touchStartY);
+        
+        if (verticalDiff > verticalThreshold) {
+            isScrolling = true;
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+        // Don't handle swipe if mobile menu is open or if user was scrolling
+        if (document.querySelector('.mobile-nav.active') || isScrolling) return;
+
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
+            const currentPath = window.location.pathname;
+            const currentHash = window.location.hash;
+            let currentIndex = 0;
+
+            // Find current page index
+            for (let i = 0; i < navLinks.length; i++) {
+                const link = navLinks[i];
+                const href = link.getAttribute('href');
+                
+                if (currentPath.endsWith(href) || (currentHash && href === currentHash)) {
+                    currentIndex = i;
+                    break;
+                }
+            }
+
+            if (diff > 0) {
+                // Swiped left - go to next page
+                const nextIndex = (currentIndex + 1) % navLinks.length;
+                const nextLink = navLinks[nextIndex];
+                const nextHref = nextLink.getAttribute('href');
+                
+                if (nextHref.startsWith('#')) {
+                    // Scroll to section
+                    const targetSection = document.querySelector(nextHref);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        history.pushState(null, '', nextHref);
+                    }
+                } else {
+                    // Navigate to page
+                    window.location.href = nextHref;
+                }
+            } else {
+                // Swiped right - go to previous page
+                const prevIndex = (currentIndex - 1 + navLinks.length) % navLinks.length;
+                const prevLink = navLinks[prevIndex];
+                const prevHref = prevLink.getAttribute('href');
+                
+                if (prevHref.startsWith('#')) {
+                    // Scroll to section
+                    const targetSection = document.querySelector(prevHref);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        history.pushState(null, '', prevHref);
+                    }
+                } else {
+                    // Navigate to page
+                    window.location.href = prevHref;
+                }
+            }
+        }
+    }, { passive: true });
+}
+
 // Initialize the website
 document.addEventListener('DOMContentLoaded', () => {
     // Add scroll event listener for animations
@@ -289,6 +551,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize theme toggle
     initThemeToggle();
+    
+    // Initialize header navigation
+    initHeaderNavigation();
+    
+    // Initialize mobile swipe navigation
+    initMobileSwipeNavigation();
     
     // Handle missing images
     handleMissingImages();

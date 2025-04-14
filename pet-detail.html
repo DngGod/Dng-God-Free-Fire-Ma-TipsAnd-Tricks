@@ -83,6 +83,9 @@
     <footer>
         <p>&copy; 2025 Dng God. All rights reserved.</p>
     </footer>
+    <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <style>
         /* Add styles for the navigation buttons */
@@ -252,6 +255,12 @@
             
             // Set up navigation buttons
             setupNavigation(pet);
+            
+            // Add keyboard navigation
+            setupKeyboardNavigation(pet);
+            
+            // Add touch swipe navigation
+            setupSwipeNavigation();
         }
         
         // Function to set up navigation between pets
@@ -263,8 +272,7 @@
             if (currentIndex > 0) {
                 const prevPet = allPets[currentIndex - 1];
                 prevButton.addEventListener('click', () => {
-                    const prevPetId = prevPet.name.toLowerCase().replace(/\s+/g, '-');
-                    window.location.href = `pet-detail.html?id=${prevPetId}`;
+                    navigateToPet(prevPet);
                 });
             } else {
                 prevButton.disabled = true;
@@ -277,8 +285,7 @@
             if (currentIndex < allPets.length - 1) {
                 const nextPet = allPets[currentIndex + 1];
                 nextButton.addEventListener('click', () => {
-                    const nextPetId = nextPet.name.toLowerCase().replace(/\s+/g, '-');
-                    window.location.href = `pet-detail.html?id=${nextPetId}`;
+                    navigateToPet(nextPet);
                 });
             } else {
                 nextButton.disabled = true;
@@ -287,8 +294,75 @@
             }
         }
         
+        // Function to navigate to a specific pet
+        function navigateToPet(pet) {
+            const petId = pet.name.toLowerCase().replace(/\s+/g, '-');
+            window.location.href = `pet-detail.html?id=${petId}`;
+        }
+        
+        // Function to set up keyboard navigation
+        function setupKeyboardNavigation(currentPet) {
+            document.addEventListener('keydown', (event) => {
+                const currentIndex = allPets.findIndex(p => p.name === currentPet.name);
+                
+                if (event.key === 'ArrowLeft' && currentIndex > 0) {
+                    // Navigate to previous pet
+                    const prevPet = allPets[currentIndex - 1];
+                    navigateToPet(prevPet);
+                } else if (event.key === 'ArrowRight' && currentIndex < allPets.length - 1) {
+                    // Navigate to next pet
+                    const nextPet = allPets[currentIndex + 1];
+                    navigateToPet(nextPet);
+                }
+            });
+        }
+        
+        // Function to set up touch swipe navigation
+        function setupSwipeNavigation() {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            const petDetailSection = document.querySelector('.pet-detail-section');
+            
+            petDetailSection.addEventListener('touchstart', (event) => {
+                touchStartX = event.changedTouches[0].screenX;
+            }, false);
+            
+            petDetailSection.addEventListener('touchend', (event) => {
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                const currentIndex = allPets.findIndex(p => 
+                    p.name.toLowerCase().replace(/\s+/g, '-') === petId
+                );
+                
+                if (touchEndX < touchStartX - 50) {
+                    // Swipe left - go to next pet
+                    if (currentIndex < allPets.length - 1) {
+                        const nextPet = allPets[currentIndex + 1];
+                        navigateToPet(nextPet);
+                    }
+                } else if (touchEndX > touchStartX + 50) {
+                    // Swipe right - go to previous pet
+                    if (currentIndex > 0) {
+                        const prevPet = allPets[currentIndex - 1];
+                        navigateToPet(prevPet);
+                    }
+                }
+            }
+        }
+        
         // Call the function when the page loads
         document.addEventListener('DOMContentLoaded', loadPetDetails);
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme toggle
+            initThemeToggle();
+        });
     </script>
 </body>
 </html> 
