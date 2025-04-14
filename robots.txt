@@ -5,6 +5,17 @@ Allow: /
 # Sitemap location
 Sitemap: https://dnggod.github.io/sitemap.xml
 
+# Allow specific file types
+Allow: /*.html$
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.gif$
+
+# Host directive
+Host: dnggod.github.io
+
 # Disallow specific paths (if needed)
 # Disallow: /private/
 # Disallow: /admin/
@@ -12,14 +23,6 @@ Sitemap: https://dnggod.github.io/sitemap.xml
 
 # Crawl-delay (if needed)
 # Crawl-delay: 10
-
-# Allow specific file types
-Allow: /*.html$
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.jpg$
-Allow: /*.png$
-Allow: /*.gif$
 
 # Host directive (optional)
 # Host: dnggod.github.io 
