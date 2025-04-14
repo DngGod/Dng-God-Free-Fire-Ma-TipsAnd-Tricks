@@ -16,13 +16,38 @@ Allow: /*.gif$
 # Host directive
 Host: dnggod.github.io
 
+# Crawl-delay
+Crawl-delay: 10
+
+# Disallow AMP validation
+User-agent: Googlebot
+Disallow: /amp/
+Disallow: /*amp=1
+Disallow: /*?amp=1
+Disallow: /*?amp=true
+Disallow: /*amp.html
+Disallow: /*amp.htm
+Disallow: /*amp/
+Disallow: /*amp$
+
+# Additional directives
+User-agent: Googlebot-Image
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.gif$
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Prevent AMP validation
+User-agent: Mediapartners-Google
+Disallow: /amp/
+Disallow: /*amp=1
+
 # Disallow specific paths (if needed)
 # Disallow: /private/
 # Disallow: /admin/
 # Disallow: /temp/
-
-# Crawl-delay (if needed)
-# Crawl-delay: 10
 
 # Host directive (optional)
 # Host: dnggod.github.io 
