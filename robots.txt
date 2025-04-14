@@ -22,6 +22,7 @@ Crawl-delay: 10
 
 # Prevent AMP validation
 User-agent: Googlebot
+Allow: /
 Disallow: /amp/
 Disallow: /*amp=1
 Disallow: /*?amp=1
@@ -41,8 +42,9 @@ Allow: /*.gif$
 User-agent: Googlebot-Mobile
 Allow: /
 
-# Prevent AMP validation
+# Prevent AMP validation for Mediapartners
 User-agent: Mediapartners-Google
+Allow: /
 Disallow: /amp/
 Disallow: /*amp=1
 
