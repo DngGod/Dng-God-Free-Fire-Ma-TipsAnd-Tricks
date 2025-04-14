@@ -353,6 +353,7 @@
             handleMissingImages();
             handleScrollAnimations();
             initImageTransition();
+            setupAdContainers();
         });
 
         function initImageTransition() {
@@ -387,6 +388,88 @@
             
             // Start the transition cycle
             setInterval(transitionImages, 4000);
+        }
+
+        // Function to setup ad containers with proper behavior
+        function setupAdContainers() {
+            const adContainers = document.querySelectorAll('.ad-container');
+            const adContainerOriginalStyles = {};
+            
+            // Save original styles for all containers
+            adContainers.forEach(container => {
+                const id = 'ad-' + Math.random().toString(36).substr(2, 9);
+                container.dataset.adId = id;
+                adContainerOriginalStyles[id] = {
+                    height: container.style.height || '',
+                    padding: container.style.padding || '',
+                    margin: container.style.margin || '',
+                    overflow: container.style.overflow || '',
+                    minHeight: container.style.minHeight || ''
+                };
+            });
+            
+            // Function to monitor ads
+            function monitorAds() {
+                adContainers.forEach(container => {
+                    const id = container.dataset.adId;
+                    const adIframe = container.querySelector('iframe');
+                    const adInsElement = container.querySelector('ins.adsbygoogle');
+                    
+                    // Check if ad is displaying
+                    if (adIframe && adIframe.clientHeight > 0) {
+                        // Restore container to original style
+                        container.style.height = adContainerOriginalStyles[id].height;
+                        container.style.padding = adContainerOriginalStyles[id].padding;
+                        container.style.margin = adContainerOriginalStyles[id].margin;
+                        container.style.overflow = adContainerOriginalStyles[id].overflow;
+                        container.style.minHeight = adContainerOriginalStyles[id].minHeight;
+                        container.classList.remove('ad-container--empty');
+                    } 
+                    // Check if ad is not displaying or unfilled
+                    else if (!adIframe || 
+                             (adInsElement && adInsElement.getAttribute('data-ad-status') === 'unfilled') || 
+                             (adInsElement && getComputedStyle(adInsElement).display === 'none')) {
+                        // Collapse container
+                        container.style.height = '0';
+                        container.style.padding = '0';
+                        container.style.margin = '0';
+                        container.style.overflow = 'hidden';
+                        container.style.minHeight = '0';
+                        container.classList.add('ad-container--empty');
+                    }
+                });
+            }
+            
+            // Set up MutationObserver to detect changes in ad containers
+            const observer = new MutationObserver(function(mutations) {
+                monitorAds();
+            });
+            
+            // Start observing each ad container
+            adContainers.forEach(container => {
+                observer.observe(container, { 
+                    childList: true, 
+                    subtree: true, 
+                    attributes: true,
+                    attributeFilter: ['data-ad-status', 'style'] 
+                });
+            });
+            
+            // Check ads on page load and periodically
+            window.addEventListener('load', monitorAds);
+            setTimeout(monitorAds, 1000);
+            setTimeout(monitorAds, 2000);
+            setTimeout(monitorAds, 5000);
+            
+            // Also check when AdSense script might modify the DOM
+            if (window.adsbygoogle) {
+                window.adsbygoogle.onload = function() {
+                    setTimeout(monitorAds, 500);
+                };
+            }
+            
+            // Check on window resize
+            window.addEventListener('resize', monitorAds);
         }
     </script>
 </body>

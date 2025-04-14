@@ -541,16 +541,114 @@ function initMobileSwipeNavigation() {
     }, { passive: true });
 }
 
-// Initialize the website
-document.addEventListener('DOMContentLoaded', () => {
-    // Add scroll event listener for animations
-    window.addEventListener('scroll', handleScrollAnimations);
+// Function to handle empty ad containers
+function handleEmptyAdContainers() {
+    // Store original styles for ad containers
+    const adContainers = document.querySelectorAll('.ad-container');
+    const originalStyles = new Map();
     
-    // Initial check for elements in view
-    handleScrollAnimations();
+    // Save original styles for all containers
+    adContainers.forEach((container, index) => {
+        // Use index as a simple identifier
+        container.dataset.adContainerId = index;
+        
+        // Store original styles
+        originalStyles.set(index, {
+            height: container.style.height,
+            padding: container.style.padding,
+            margin: container.style.margin,
+            overflow: container.style.overflow,
+            minHeight: container.style.minHeight
+        });
+    });
     
+    // Function to check ad status and update container accordingly
+    function checkAdStatus() {
+        adContainers.forEach(container => {
+            const id = container.dataset.adContainerId;
+            const adIframe = container.querySelector('iframe');
+            const adIns = container.querySelector('ins.adsbygoogle');
+            const adStatus = adIns ? adIns.getAttribute('data-ad-status') : null;
+            
+            // Ad is visible and loaded
+            if (adIframe && adIframe.clientHeight > 0) {
+                // Restore original styles
+                const styles = originalStyles.get(parseInt(id));
+                container.style.height = styles.height;
+                container.style.padding = styles.padding;
+                container.style.margin = styles.margin;
+                container.style.overflow = styles.overflow;
+                container.style.minHeight = styles.minHeight;
+                container.classList.remove('ad-container--empty');
+                console.log('Ad container restored - ad is displaying');
+            } 
+            // Ad is unfilled or not loaded
+            else if (!adIframe || adStatus === 'unfilled' || (adIns && window.getComputedStyle(adIns).display === 'none')) {
+                // Collapse container
+                container.style.height = '0';
+                container.style.padding = '0';
+                container.style.margin = '0';
+                container.style.overflow = 'hidden';
+                container.style.minHeight = '0';
+                container.classList.add('ad-container--empty');
+            }
+        });
+    }
+    
+    // Check on initial load
+    setTimeout(checkAdStatus, 1000);
+    setTimeout(checkAdStatus, 2000);
+    setTimeout(checkAdStatus, 5000);
+    
+    // Add mutation observer to detect when ads load
+    const observer = new MutationObserver(function(mutations) {
+        checkAdStatus();
+    });
+    
+    // Observe all ad containers
+    adContainers.forEach(container => {
+        observer.observe(container, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['data-ad-status', 'style']
+        });
+    });
+    
+    // Check when window is resized
+    window.addEventListener('resize', checkAdStatus);
+    
+    // Additional check for when ads load
+    window.addEventListener('load', function() {
+        checkAdStatus();
+        
+        // If Google AdSense is available, add a listener
+        if (window.adsbygoogle) {
+            setTimeout(checkAdStatus, 3000);
+        }
+    });
+}
+
+// Initialize all scripts when the DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
     // Initialize theme toggle
     initThemeToggle();
+    
+    // Handle mobile menu
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileNav = document.querySelector('.mobile-nav');
+    
+    if (mobileMenuBtn && mobileNav) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+        });
+    }
+    
+    // Handle missing images
+    handleMissingImages();
+    
+    // Initialize random characters and pets on home page
+    displayRandomCharactersAndPets();
     
     // Initialize header navigation
     initHeaderNavigation();
@@ -558,9 +656,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize mobile swipe navigation
     initMobileSwipeNavigation();
     
-    // Handle missing images
-    handleMissingImages();
+    // Handle scroll animations
+    window.addEventListener('scroll', handleScrollAnimations);
     
-    // Display random characters and pets on the home page
-    displayRandomCharactersAndPets();
-}); 
+    // Handle empty ad containers
+    handleEmptyAdContainers();
+    
+    // Re-check ad containers when window is resized
+    window.addEventListener('resize', handleEmptyAdContainers);
+});
+
+// Also check for ad status changes after window loads completely
+window.addEventListener('load', handleEmptyAdContainers); 

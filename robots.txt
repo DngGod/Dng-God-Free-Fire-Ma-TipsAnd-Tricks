@@ -2,9 +2,7 @@
 User-agent: *
 Allow: /
 
-# Sitemap locations
-Sitemap: https://dnggod.github.io/sitemap-minimal.xml
-Sitemap: https://dnggod.github.io/sitemap-plain.xml
+# Sitemap location
 Sitemap: https://dnggod.github.io/sitemap.xml
 
 # Allow specific file types

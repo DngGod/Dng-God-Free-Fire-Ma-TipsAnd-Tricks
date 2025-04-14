@@ -1901,10 +1901,29 @@ img:not(.header-logo):not(.transition-image) {
     }
 }
 
-/* Ensure ads don't affect layout */
-ins.adsbygoogle {
-    display: block !important;
-    margin: 0 auto;
+/* Prevent Ads from Breaking Layout */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+    display: none !important;
+}
+
+/* Make ad containers collapse when ads aren't present */
+.ad-container:has(ins.adsbygoogle[data-ad-status="unfilled"]) {
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    min-height: 0 !important;
+    transition: all 0.3s ease;
+}
+
+/* Additional style for containers with no ads */
+.ad-container:empty,
+.ad-container:has(ins.adsbygoogle[style*="display: none"]) {
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    min-height: 0 !important;
 }
 
 /* Ad Animation */
@@ -1915,6 +1934,7 @@ ins.adsbygoogle {
 
 .ad-container {
     animation: fadeIn 0.5s ease-in;
+    transition: all 0.3s ease;
 }
 
 /* AdSense Styles */
@@ -1971,13 +1991,20 @@ ins.adsbygoogle {
     }
 }
 
-/* Prevent Ads from Breaking Layout */
-ins.adsbygoogle[data-ad-status="unfilled"] {
-    display: none !important;
-}
-
 /* Ensure Ads Don't Overflow */
 .ad-container {
     overflow: hidden;
     position: relative;
+}
+
+/* Fallback for browsers that don't support :has */
+@media (max-width: 1000000px) {
+    /* This will be included by all browsers */
+    .ad-container--empty {
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        min-height: 0 !important;
+    }
 } 
