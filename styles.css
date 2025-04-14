@@ -1840,4 +1840,69 @@ ins.adsbygoogle {
 
 .ad-container {
     animation: fadeIn 0.5s ease-in;
+}
+
+/* AdSense Styles */
+ins.adsbygoogle {
+    display: block;
+    max-width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Header Ad */
+.header-ad ins.adsbygoogle {
+    max-width: 728px;
+    height: 90px;
+    margin: 10px auto;
+}
+
+/* Content Ad */
+.content-ad ins.adsbygoogle {
+    max-width: 336px;
+    height: 280px;
+    margin: 20px auto;
+}
+
+/* Sidebar Ad */
+.sidebar-ad ins.adsbygoogle {
+    max-width: 300px;
+    height: 250px;
+    margin: 20px auto;
+}
+
+/* Footer Ad */
+.footer-ad ins.adsbygoogle {
+    max-width: 728px;
+    height: 90px;
+    margin: 20px auto;
+}
+
+/* Mobile Responsive Ads */
+@media (max-width: 768px) {
+    .header-ad ins.adsbygoogle,
+    .footer-ad ins.adsbygoogle {
+        max-width: 320px;
+        height: 100px;
+    }
+    
+    .content-ad ins.adsbygoogle {
+        max-width: 300px;
+        height: 250px;
+    }
+    
+    .sidebar-ad {
+        display: none;
+    }
+}
+
+/* Prevent Ads from Breaking Layout */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+    display: none !important;
+}
+
+/* Ensure Ads Don't Overflow */
+.ad-container {
+    overflow: hidden;
+    position: relative;
 } 
