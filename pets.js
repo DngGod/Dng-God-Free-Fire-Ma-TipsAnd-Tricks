@@ -214,12 +214,24 @@ const allPets = [
 
 // Function to create pet cards
 function createPetCards(pets = allPets) {
-    const petsGrid = document.querySelector('.pets-grid');
+    const petsGrid = document.querySelector('.pet-grid');
+    
+    if (!petsGrid) {
+        console.error('Pet grid container not found! Looking for .pet-grid');
+        return;
+    }
+    
+    console.log('Pet grid container found, adding pet cards');
     petsGrid.innerHTML = ''; // Clear existing content
     
-    pets.forEach(pet => {
+    pets.forEach((pet, index) => {
         const card = document.createElement('div');
         card.className = 'pet-card';
+        
+        // Add visible class with delay for animation
+        setTimeout(() => {
+            card.classList.add('visible');
+        }, index * 100);
         
         // Encode the image path to handle spaces in filenames
         const encodedImagePath = encodeURI(pet.image);
@@ -278,12 +290,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    // Add event listeners for filter buttons
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get filter value
+                const filterValue = button.getAttribute('data-filter');
+                
+                // Filter pets
+                filterPets(filterValue);
+            });
+        });
+    }
+    
     // Add scroll-based animations
     window.addEventListener('scroll', handleScrollAnimations);
     
     // Initial check for elements in view
     handleScrollAnimations();
 });
+
+// Function to filter pets
+function filterPets(filter) {
+    if (filter === 'all') {
+        createPetCards();
+        return;
+    }
+    
+    // Determine active vs passive pets based on their description or abilities
+    const filteredPets = allPets.filter(pet => {
+        // This is a simplified logic - you might need to adjust based on actual data
+        if (filter === 'active') {
+            return pet.abilityDescription.includes('active') || 
+                  !pet.abilityDescription.includes('passive') && 
+                  (pet.cooldown !== 'N/A' || pet.duration !== 'N/A');
+        } else if (filter === 'passive') {
+            return pet.abilityDescription.includes('passive') || 
+                  (pet.cooldown === 'N/A' && pet.duration === 'N/A') ||
+                  pet.usageTips.includes('passive');
+        }
+        return true;
+    });
+    
+    createPetCards(filteredPets);
+}
 
 // Add scroll-based animations
 function handleScrollAnimations() {

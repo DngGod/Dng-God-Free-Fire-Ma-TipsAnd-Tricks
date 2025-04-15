@@ -108,6 +108,7 @@
             --nav-link-hover: #ff4d4d;
             --section-bg: #f9f9f9;
             --border-color: #ddd;
+            --premium-gold: #ffd700;
         }
         
         [data-theme="dark"] {
@@ -159,6 +160,132 @@
             background-color: var(--footer-bg);
             color: var(--footer-text);
             transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Mobile Navigation Styles */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 20px;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.4rem;
+            padding: 12px 25px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .mobile-nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--premium-gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--premium-gold);
+            transform: translateY(-3px);
+        }
+
+        .mobile-nav a:hover::before {
+            width: 80%;
+        }
+
+        .mobile-nav a.active {
+            color: var(--premium-gold);
+            font-weight: bold;
+        }
+
+        .mobile-nav a.active::before {
+            width: 80%;
+            background: var(--premium-gold);
+        }
+
+        .mobile-close-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 15px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-close-btn:hover {
+            color: var(--premium-gold);
+            transform: translateX(-50%) rotate(90deg);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--premium-gold);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        /* Body lock when menu is open */
+        body.menu-open {
+            overflow: hidden;
         }
         
         /* Collaborators Popup Styles */
@@ -289,26 +416,29 @@
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="tips.html">Tips</a></li>
                 <li><a href="characters.html">Characters</a></li>
                 <li><a href="weapons.html">Weapons</a></li>
                 <li><a href="pets.html">Pets</a></li>
                 <li><a href="youtube.html">YouTube</a></li>
-                <li><a href="collaborators.html">Creators</a></li>
+                <li><a href="collaborators.html">Collaborators</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
         <div class="mobile-nav">
-            <a href="index.html">Home</a>
+            <button class="mobile-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="index.html" class="active">Home</a>
             <a href="about.html">About</a>
             <a href="tips.html">Tips</a>
             <a href="characters.html">Characters</a>
             <a href="weapons.html">Weapons</a>
             <a href="pets.html">Pets</a>
             <a href="youtube.html">YouTube</a>
-            <a href="collaborators.html">Creators</a>
+            <a href="collaborators.html">Collaborators</a>
             <a href="#contact">Contact</a>
         </div>
     </header>
@@ -637,6 +767,32 @@
                 }
             });
         }
+
+        // Mobile Menu Toggle is now handled in script.js
+
+        // Collaborators Modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const collabPopupBtn = document.getElementById('collabPopupBtn');
+            const collabModal = document.getElementById('collabModal');
+            const collabModalClose = document.getElementById('collabModalClose');
+
+            if (collabPopupBtn && collabModal && collabModalClose) {
+                collabPopupBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    collabModal.style.display = 'block';
+                });
+
+                collabModalClose.addEventListener('click', function() {
+                    collabModal.style.display = 'none';
+                });
+
+                window.addEventListener('click', function(e) {
+                    if (e.target === collabModal) {
+                        collabModal.style.display = 'none';
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html> 

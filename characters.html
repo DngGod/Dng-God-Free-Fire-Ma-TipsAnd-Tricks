@@ -19,6 +19,137 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7691638281268003" crossorigin="anonymous"></script>
     <script src="characters.js" defer></script>
     <script src="script.js" defer></script>
+    <style>
+        /* Mobile Navigation Styles */
+        :root {
+            --premium-gold: #ffd700;
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 20px;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.4rem;
+            padding: 12px 25px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .mobile-nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--premium-gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--premium-gold);
+            transform: translateY(-3px);
+        }
+
+        .mobile-nav a:hover::before {
+            width: 80%;
+        }
+
+        .mobile-nav a.active {
+            color: var(--premium-gold);
+            font-weight: bold;
+        }
+
+        .mobile-nav a.active::before {
+            width: 80%;
+            background: var(--premium-gold);
+        }
+
+        .mobile-close-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 15px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-close-btn:hover {
+            color: var(--premium-gold);
+            transform: translateX(-50%) rotate(90deg);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--premium-gold);
+        }
+
+        /* Body lock when menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -38,11 +169,14 @@
                 <li><a href="weapons.html">Weapons</a></li>
                 <li><a href="pets.html">Pets</a></li>
                 <li><a href="youtube.html">YouTube</a></li>
-                <li><a href="collaborators.html">Creators</a></li>
+                <li><a href="collaborators.html">Collaborators</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
         <div class="mobile-nav">
+            <button class="mobile-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="tips.html">Tips</a>
@@ -50,7 +184,7 @@
             <a href="weapons.html">Weapons</a>
             <a href="pets.html">Pets</a>
             <a href="youtube.html">YouTube</a>
-            <a href="collaborators.html">Creators</a>
+            <a href="collaborators.html">Collaborators</a>
             <a href="#contact">Contact</a>
         </div>
     </header>
@@ -122,5 +256,7 @@
     <button class="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
     </button>
+
+    <!-- Mobile Menu Toggle is now handled in script.js -->
 </body>
 </html> 

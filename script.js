@@ -1,5 +1,10 @@
 // IAB TCF consent implementation for Google AdSense
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - Initializing mobile navigation first');
+    
+    // Initialize mobile navigation FIRST to ensure it works across all pages
+    initMobileNavigation();
+    
     // Check if in EU zone (simplified approach - you may want to use a geo-detection service)
     const checkEUVisitor = () => {
         return new Promise((resolve) => {
@@ -35,7 +40,78 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+    
+    // Initialize all site functionality
+    initThemeToggle();
+    handleMissingImages();
+    displayRandomCharactersAndPets();
+    initHeaderNavigation();
+    initMobileSwipeNavigation();
+    handleScrollAnimations();
+    handleEmptyAdContainers();
 });
+
+// Function to initialize mobile navigation
+function initMobileNavigation() {
+    console.log('Initializing mobile navigation');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileCloseBtn = document.querySelector('.mobile-close-btn');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const body = document.body;
+
+    console.log('Mobile elements found:', 
+                'menu button:', !!mobileMenuBtn, 
+                'close button:', !!mobileCloseBtn, 
+                'mobile nav:', !!mobileNav);
+
+    if (mobileMenuBtn && mobileCloseBtn && mobileNav) {
+        // Remove any existing event listeners by cloning and replacing elements
+        const newMobileMenuBtn = mobileMenuBtn.cloneNode(true);
+        const newMobileCloseBtn = mobileCloseBtn.cloneNode(true);
+        mobileMenuBtn.parentNode.replaceChild(newMobileMenuBtn, mobileMenuBtn);
+        mobileCloseBtn.parentNode.replaceChild(newMobileCloseBtn, mobileCloseBtn);
+        
+        // Open mobile menu when hamburger icon is clicked
+        newMobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('Mobile menu button clicked');
+            mobileNav.classList.add('active');
+            body.style.overflow = 'hidden';
+            console.log('Mobile menu opened');
+        });
+
+        // Close mobile menu when X button is clicked
+        newMobileCloseBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('Mobile close button clicked');
+            mobileNav.classList.remove('active');
+            body.style.overflow = '';
+            console.log('Mobile menu closed via X button');
+        });
+
+        // Close menu when clicking on a link
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                body.style.overflow = '';
+                console.log('Mobile menu closed via link click');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(e.target) && 
+                !newMobileMenuBtn.contains(e.target)) {
+                mobileNav.classList.remove('active');
+                body.style.overflow = '';
+                console.log('Mobile menu closed via outside click');
+            }
+        });
+    } else {
+        console.warn('Mobile navigation elements not found on this page');
+    }
+}
 
 // Theme Toggle Functionality
 function initThemeToggle() {
@@ -274,47 +350,6 @@ document.addEventListener('DOMContentLoaded', function() {
         container.className = 'image-container';
         img.parentNode.insertBefore(container, img);
         container.appendChild(img);
-    });
-});
-
-// Header scroll behavior
-let lastScroll = 0;
-const header = document.querySelector('header');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > lastScroll) {
-        // Scrolling down
-        header.classList.add('hide');
-    } else {
-        // Scrolling up
-        header.classList.remove('hide');
-    }
-    
-    lastScroll = currentScroll;
-});
-
-// Mobile menu functionality
-const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const mobileNav = document.querySelector('.mobile-nav');
-
-mobileMenuBtn.addEventListener('click', () => {
-    mobileNav.classList.toggle('active');
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!mobileMenuBtn.contains(e.target) && !mobileNav.contains(e.target)) {
-        mobileNav.classList.remove('active');
-    }
-});
-
-// Close mobile menu when clicking a link
-const mobileLinks = document.querySelectorAll('.mobile-nav a');
-mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        mobileNav.classList.remove('active');
     });
 });
 
@@ -668,101 +703,10 @@ function handleEmptyAdContainers() {
     });
 }
 
-// Initialize all scripts when the DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize theme toggle
-    initThemeToggle();
-    
-    // Handle mobile menu
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileNav = document.querySelector('.mobile-nav');
-    
-    if (mobileMenuBtn && mobileNav) {
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileNav.classList.toggle('active');
-        });
-    }
-    
-    // Handle missing images
-    handleMissingImages();
-    
-    // Initialize random characters and pets on home page
-    displayRandomCharactersAndPets();
-    
-    // Initialize header navigation
-    initHeaderNavigation();
-    
-    // Initialize mobile swipe navigation
-    initMobileSwipeNavigation();
-    
-    // Handle scroll animations
-    window.addEventListener('scroll', handleScrollAnimations);
-    
-    // Handle empty ad containers
-    handleEmptyAdContainers();
-    
-    // Re-check ad containers when window is resized
-    window.addEventListener('resize', handleEmptyAdContainers);
-});
-
 // Also check for ad status changes after window loads completely
-window.addEventListener('load', handleEmptyAdContainers);
-
-// Mobile Navigation
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileNav = document.querySelector('.mobile-nav');
-    const navLinks = document.querySelectorAll('.mobile-nav a');
-    const header = document.querySelector('header');
-    let lastScrollTop = 0;
-
-    // Toggle mobile menu
-    mobileMenuBtn.addEventListener('click', function() {
-        mobileNav.classList.toggle('active');
-        this.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
-    });
-
-    // Close mobile menu when clicking a link
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            mobileNav.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        });
-    });
-
-    // Handle scroll behavior
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Hide/show header on scroll
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-        lastScrollTop = scrollTop;
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const headerOffset = header.offsetHeight;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+window.addEventListener('load', function() {
+    handleEmptyAdContainers();
+    // Re-initialize mobile navigation to be safe
+    console.log('Window load event - re-initializing mobile navigation');
+    setTimeout(initMobileNavigation, 500);
 }); 

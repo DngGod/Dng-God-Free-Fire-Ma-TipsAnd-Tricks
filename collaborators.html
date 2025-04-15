@@ -275,22 +275,133 @@
         }
 
         @media (max-width: 768px) {
+            .premium-hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+
             .premium-title {
-                font-size: 3rem;
+                font-size: 2.5rem;
+                padding: 0 20px;
             }
 
             .premium-subtitle {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 padding: 0 20px;
+            }
+
+            .premium-badge {
+                padding: 8px 20px;
+                font-size: 0.9rem;
             }
 
             .collaborators-grid {
                 grid-template-columns: 1fr;
-                padding: 30px 20px;
+                gap: 20px;
+                padding: 30px 15px;
+            }
+
+            .collaborator-header {
+                height: 200px;
+            }
+
+            .collaborator-content {
+                padding: 20px;
+            }
+
+            .collaborator-name {
+                font-size: 1.5rem;
+            }
+
+            .collaborator-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .collaborator-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .collaborator-link {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .feedback-section {
+                padding: 40px 15px;
+            }
+
+            .feedback-container {
+                padding: 20px;
+            }
+
+            .feedback-title {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 10px;
+                font-size: 0.9rem;
             }
 
             .premium-features {
-                padding: 40px 20px;
+                padding: 40px 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            .feature-title {
+                font-size: 1.3rem;
+            }
+
+            .feature-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .premium-hero {
+                height: 50vh;
+                min-height: 300px;
+            }
+
+            .premium-title {
+                font-size: 2rem;
+            }
+
+            .premium-subtitle {
+                font-size: 1rem;
+            }
+
+            .collaborator-header {
+                height: 180px;
+            }
+
+            .collaborator-badge {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 0.7rem;
             }
         }
 
@@ -298,6 +409,8 @@
         .feedback-section {
             padding: 60px 20px;
             background: var(--section-bg);
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feedback-container {
@@ -380,12 +493,163 @@
         }
 
         @media (max-width: 768px) {
+            .feedback-section {
+                padding: 40px 15px;
+            }
+
             .feedback-container {
                 padding: 20px;
             }
 
             .feedback-title {
                 font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feedback-section {
+                padding: 30px 10px;
+            }
+
+            .feedback-container {
+                padding: 15px;
+            }
+
+            .feedback-title {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 20px;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.4rem;
+            padding: 12px 25px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .mobile-nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--premium-gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--premium-gold);
+            transform: translateY(-3px);
+        }
+
+        .mobile-nav a:hover::before {
+            width: 80%;
+        }
+
+        .mobile-nav a.active {
+            color: var(--premium-gold);
+            font-weight: bold;
+        }
+
+        .mobile-nav a.active::before {
+            width: 80%;
+            background: var(--premium-gold);
+        }
+
+        .mobile-close-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 15px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-close-btn:hover {
+            color: var(--premium-gold);
+            transform: translateX(-50%) rotate(90deg);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--premium-gold);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
             }
         }
     </style>
@@ -413,6 +677,9 @@
             </ul>
         </nav>
         <div class="mobile-nav">
+            <button class="mobile-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="tips.html">Tips</a>
@@ -614,34 +881,80 @@
 
     <script src="script.js"></script>
     <script>
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-            
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Thank you for your feedback!');
-                this.reset();
-            })
-            .catch(error => {
-                alert('Oops! There was a problem sending your feedback. Please try again.');
-            })
-            .finally(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle is now handled in script.js
+            /*
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileCloseBtn = document.querySelector('.mobile-close-btn');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const body = document.body;
+
+            if (mobileMenuBtn && mobileCloseBtn && mobileNav) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileNav.classList.add('active');
+                    body.style.overflow = 'hidden';
+                });
+
+                mobileCloseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileNav.classList.remove('active');
+                    body.style.overflow = '';
+                });
+
+                // Close menu when clicking on a link
+                mobileNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileNav.classList.remove('active');
+                        body.style.overflow = '';
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (mobileNav.classList.contains('active') && 
+                        !mobileNav.contains(e.target) && 
+                        !mobileMenuBtn.contains(e.target)) {
+                        mobileNav.classList.remove('active');
+                        body.style.overflow = '';
+                    }
+                });
+            }
+            */
+
+            // Feedback Form Handler
+            const feedbackForm = document.getElementById('feedbackForm');
+            if (feedbackForm) {
+                feedbackForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(this);
+                    const submitBtn = this.querySelector('.submit-btn');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert('Thank you for your feedback!');
+                        this.reset();
+                    })
+                    .catch(error => {
+                        alert('Oops! There was a problem sending your feedback. Please try again.');
+                    })
+                    .finally(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    });
+                });
+            }
         });
     </script>
 </body>
