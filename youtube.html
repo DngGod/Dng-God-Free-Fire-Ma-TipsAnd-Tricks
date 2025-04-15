@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dng God - YouTube Channel</title>
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="google642489df059f8d83" />
+    <!-- Standard meta tags -->
+    <meta name="description" content="Dng God YouTube channel featuring Free Fire tips, tricks, gameplay, and tutorials.">
+    <meta name="keywords" content="Free Fire, YouTube, gameplay, tips, tricks, Dng God">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://dnggod.github.io/youtube.html">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7691638281268003" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-7691638281268003">
+    <style>
+        /* Dark mode styles */
+        :root {
+            --primary-color: #ff4d4d;
+            --secondary-color: #333;
+            --text-color: #333;
+            --bg-color: #fff;
+            --card-bg: #f5f5f5;
+            --header-bg: #fff;
+            --footer-bg: #333;
+            --footer-text: #fff;
+            --nav-link-color: #333;
+            --nav-link-hover: #ff4d4d;
+            --section-bg: #f9f9f9;
+            --border-color: #ddd;
+            --youtube-red: #ff0000;
+            --youtube-dark-red: #cc0000;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --card-hover-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
+            --gradient-bg: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+        }
+        
+        [data-theme="dark"] {
+            --primary-color: #ff6b6b;
+            --secondary-color: #222;
+            --text-color: #f5f5f5;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --header-bg: #1a1a1a;
+            --footer-bg: #1a1a1a;
+            --footer-text: #f5f5f5;
+            --nav-link-color: #f5f5f5;
+            --nav-link-hover: #ff6b6b;
+            --section-bg: #1a1a1a;
+            --border-color: #333;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 15px 30px rgba(255, 0, 0, 0.3);
+            --gradient-bg: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .youtube-section {
+            padding: 40px 20px;
+            background-color: var(--section-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .youtube-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('edited new img/Free fire logo.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .youtube-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .youtube-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .youtube-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-bg);
+            border-radius: 2px;
+        }
+        
+        .youtube-header h1 {
+            color: var(--youtube-red);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .youtube-header h1::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--youtube-red);
+            opacity: 0.1;
+            border-radius: 50%;
+            left: -15px;
+            top: -10px;
+            z-index: -1;
+        }
+        
+        .youtube-header h1::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: var(--youtube-red);
+            opacity: 0.1;
+            border-radius: 50%;
+            right: -20px;
+            bottom: -10px;
+            z-index: -1;
+        }
+        
+        .youtube-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .channel-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            position: relative;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .channel-info:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        .channel-logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 40px;
+            border: 4px solid var(--youtube-red);
+            position: relative;
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+        }
+        
+        .channel-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-bg);
+            opacity: 0.3;
+            z-index: 1;
+            transition: opacity 0.3s;
+        }
+        
+        .channel-info:hover .channel-logo::before {
+            opacity: 0.1;
+        }
+        
+        .channel-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .channel-info:hover .channel-logo img {
+            transform: scale(1.1);
+        }
+        
+        .channel-stats {
+            text-align: left;
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .channel-name {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .channel-name i {
+            color: var(--youtube-red);
+            margin-right: 15px;
+            font-size: 2.4rem;
+        }
+        
+        .channel-description {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .subscribe-btn {
+            display: inline-block;
+            background-color: var(--youtube-red);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .subscribe-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--youtube-dark-red);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .subscribe-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+        }
+        
+        .subscribe-btn:hover::before {
+            left: 0;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .video-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.1);
+        }
+        
+        .video-thumbnail .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 4rem;
+            opacity: 0.8;
+            transition: opacity 0.3s, transform 0.3s;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .video-card:hover .play-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        
+        .video-info {
+            padding: 20px;
+        }
+        
+        .video-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .embed-container {
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .embed-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        .channel-description {
+            text-align: center;
+            margin: 40px auto;
+            max-width: 900px;
+        }
+        
+        .content-cards {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .content-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            flex: 1 1 250px;
+            max-width: 300px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid var(--border-color);
+        }
+        
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-bg);
+            z-index: 1;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        .content-card i {
+            font-size: 3rem;
+            color: var(--youtube-red);
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .content-card:hover i {
+            transform: scale(1.2);
+        }
+        
+        .content-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .content-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--youtube-red);
+            transition: width 0.3s;
+        }
+        
+        .content-card:hover h3::after {
+            width: 100%;
+        }
+        
+        .content-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin-top: 80px;
+            padding: 50px 30px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('edited new img/Free fire logo.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .cta-section:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        .cta-section h2 {
+            margin-bottom: 20px;
+            color: var(--youtube-red);
+            font-size: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background: var(--gradient-bg);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 77, 77, 0.4);
+        }
+        
+        .cta-btn:hover::before {
+            left: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .youtube-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .channel-info {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .channel-logo {
+                margin-right: 0;
+                margin-bottom: 20px;
+                width: 150px;
+                height: 150px;
+            }
+            
+            .channel-stats {
+                text-align: center;
+                min-width: auto;
+            }
+            
+            .content-cards {
+                gap: 20px;
+            }
+            
+            .content-card {
+                max-width: 100%;
+            }
+            
+            .cta-section {
+                padding: 30px 20px;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Animation keyframes */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .custom-channel-logo:hover .channel-letter {
+            transform: translateY(-5px) scale(1.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .custom-channel-logo:hover .gaming-icon {
+            transform: rotate(20deg);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="edited new img/dng god jpg(1).jpg" alt="Dng God Logo" class="header-logo">
+                <h1>Dng God</h1>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="tips.html">Tips</a></li>
+                <li><a href="characters.html">Characters</a></li>
+                <li><a href="weapons.html">Weapons</a></li>
+                <li><a href="pets.html">Pets</a></li>
+                <li><a href="youtube.html">YouTube</a></li>
+                <li><a href="collaborators.html">Creators</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="tips.html">Tips</a>
+            <a href="characters.html">Characters</a>
+            <a href="weapons.html">Weapons</a>
+            <a href="pets.html">Pets</a>
+            <a href="youtube.html">YouTube</a>
+            <a href="collaborators.html">Creators</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <!-- HEADER AD -->
+    <div class="ad-container header-ad">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-7691638281268003"
+             data-ad-slot="6402071441"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <main>
+        <section class="youtube-section">
+            <div class="youtube-container">
+                <div class="youtube-header">
+                    <h1>DNG GOD YouTube Channel</h1>
+                    <p>Watch exclusive Free Fire gameplay, tips, tricks, and tutorials by DNG GOD. Subscribe to stay updated with all the latest Free Fire content!</p>
+                </div>
+
+                <div class="channel-info">
+                    <div class="custom-channel-logo" style="width: 180px; height: 180px; position: relative; margin-right: 40px; display: flex; align-items: center; justify-content: center;">
+                        <!-- Animated Background -->
+                        <div class="logo-background" style="position: absolute; width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%); animation: spin 10s linear infinite; box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);"></div>
+                        
+                        <!-- Fire Effect Overlay -->
+                        <div class="fire-effect" style="position: absolute; width: 100%; height: 100%; border-radius: 50%; background: url('edited new img/dng god jpg(2).jpg') center center; background-size: cover; opacity: 0.7; mix-blend-mode: overlay;"></div>
+                        
+                        <!-- Channel Initial with Gaming Theme -->
+                        <div class="channel-letter" style="position: relative; z-index: 2; font-size: 70px; font-weight: 900; color: white; text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 165, 0, 0.5); font-family: Arial, sans-serif; transform: translateY(-5px);">DG</div>
+                        
+                        <!-- Outer Ring -->
+                        <div class="outer-ring" style="position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 4px solid white; box-shadow: 0 0 0 2px #ff4b2b, 0 0 20px rgba(255, 0, 0, 0.5); animation: pulse 2s infinite ease-in-out;"></div>
+                        
+                        <!-- Gaming Controller Icon -->
+                        <div class="gaming-icon" style="position: absolute; bottom: 15%; right: 15%; background: rgba(255, 255, 255, 0.9); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
+                            <i class="fas fa-gamepad" style="color: #ff4b2b; font-size: 20px;"></i>
+                        </div>
+                    </div>
+                    <div class="channel-stats">
+                        <h2 class="channel-name"><i class="fab fa-youtube"></i> DNG GOD</h2>
+                        <p>Free Fire tips, gameplay and strategies</p>
+                        <a href="https://www.youtube.com/channel/UCpbpCpQi3NQddN21ol8-TNQ?sub_confirmation=1" class="subscribe-btn" target="_blank">
+                            <i class="fas fa-bell"></i> Subscribe Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Featured Channel Content -->
+                <div class="embed-container float">
+                    <!-- Direct Channel Link -->
+                    <a href="https://www.youtube.com/channel/UCpbpCpQi3NQddN21ol8-TNQ?sub_confirmation=1" target="_blank" style="display: block; width: 100%; height: 100%; text-decoration: none;">
+                        <div style="background: var(--gradient-bg); color: white; padding: 60px 30px; border-radius: 20px; text-align: center; position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('edited new img/dng god jpg(2).jpg') center center; background-size: cover; opacity: 0.2; z-index: 1;"></div>
+                            <div style="position: relative; z-index: 2;">
+                                <i class="fab fa-youtube pulse" style="font-size: 5rem; margin-bottom: 20px; display: inline-block;"></i>
+                                <h2 style="font-size: 3.5rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Watch Our Videos</h2>
+                                <p style="font-size: 1.4rem; max-width: 800px; margin: 0 auto 30px; line-height: 1.6;">Click here to view all our Free Fire gameplay videos, tips, tricks, and tutorials</p>
+                                <div class="cta-btn">
+                                    <i class="fas fa-play-circle"></i> Visit Channel
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Featured Video Section -->
+                <div style="margin: 80px auto 60px; max-width: 1200px;">
+                    <div class="featured-video-container float" style="border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); background: var(--card-bg); padding: 30px; border: 1px solid var(--border-color);">
+                        <h2 style="text-align: center; font-size: 2.8rem; color: var(--youtube-red); margin-bottom: 30px; position: relative;">Featured Gameplay</h2>
+                        
+                        <div class="embed-container" style="padding-bottom: 56.25%; margin-bottom: 30px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/IOB2i73XUe0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <a href="https://youtu.be/IOB2i73XUe0" target="_blank" class="cta-btn pulse" style="display: inline-block; padding: 15px 40px; transform: translateY(0);">
+                                <i class="fas fa-play-circle"></i> Watch on YouTube
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <h2 style="margin-top: 60px; text-align: center; font-size: 2.5rem; color: var(--youtube-red); position: relative;">Channel Content</h2>
+                
+                <div class="channel-description">
+                    <p style="font-size: 1.2rem; line-height: 1.8;">The DNG GOD YouTube channel is dedicated to Free Fire content, providing viewers with premium gameplay videos, tutorials, and strategies to improve your skills.</p>
+                    <ul class="content-cards">
+                        <li class="content-card float">
+                            <i class="fas fa-gamepad"></i>
+                            <h3>Gameplay</h3>
+                            <p>Exciting Free Fire matches and highlights with advanced tactics and incredible plays</p>
+                        </li>
+                        <li class="content-card float" style="animation-delay: 0.5s;">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Tips & Tricks</h3>
+                            <p>Professional strategies to elevate your gameplay and dominate every match</p>
+                        </li>
+                        <li class="content-card float" style="animation-delay: 1s;">
+                            <i class="fas fa-users"></i>
+                            <h3>Character Guides</h3>
+                            <p>Detailed tutorials on maximizing each character's unique abilities and potential</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="cta-section pulse">
+                    <h2>Join The DNG GOD Community</h2>
+                    <p>Subscribe to the channel for weekly Free Fire content, live streams, and exclusive gameplay videos that will help you become a better player.</p>
+                    <a href="https://www.youtube.com/channel/UCpbpCpQi3NQddN21ol8-TNQ?sub_confirmation=1" class="cta-btn" target="_blank">
+                        <i class="fab fa-youtube"></i> Subscribe Now
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer AD -->
+    <div class="ad-container footer-ad">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-7691638281268003"
+             data-ad-slot="4025758925"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Dng God. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="https://www.youtube.com/channel/UCpbpCpQi3NQddN21ol8-TNQ?sub_confirmation=1" class="youtube-link"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+        </div>
+    </footer>
+    <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <script src="script.js"></script>
+</body>
+</html> 

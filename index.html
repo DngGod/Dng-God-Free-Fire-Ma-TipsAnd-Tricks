@@ -160,6 +160,122 @@
             color: var(--footer-text);
             transition: background-color 0.3s, color 0.3s;
         }
+        
+        /* Collaborators Popup Styles */
+        .collab-popup-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .collab-popup-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .collab-popup-btn i {
+            font-size: 1.5rem;
+        }
+
+        .collab-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .collab-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .collab-modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            margin: auto;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 77, 77, 0.3);
+        }
+
+        .collab-modal.active .collab-modal-content {
+            transform: translateY(0);
+        }
+
+        .collab-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .collab-modal-close:hover {
+            transform: rotate(90deg);
+            color: #ff4d4d;
+        }
+
+        .collab-modal-title {
+            color: #ff4d4d;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .collab-modal-text {
+            color: #fff;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .collab-modal-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            text-align: center;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .collab-modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -179,6 +295,8 @@
                 <li><a href="characters.html">Characters</a></li>
                 <li><a href="weapons.html">Weapons</a></li>
                 <li><a href="pets.html">Pets</a></li>
+                <li><a href="youtube.html">YouTube</a></li>
+                <li><a href="collaborators.html">Creators</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -189,9 +307,29 @@
             <a href="characters.html">Characters</a>
             <a href="weapons.html">Weapons</a>
             <a href="pets.html">Pets</a>
+            <a href="youtube.html">YouTube</a>
+            <a href="collaborators.html">Creators</a>
             <a href="#contact">Contact</a>
         </div>
     </header>
+
+    <!-- Collaborators Popup Button -->
+    <a href="#" class="collab-popup-btn" id="collabPopupBtn">
+        <i class="fas fa-users"></i>
+        Meet Our Creators
+    </a>
+
+    <!-- Collaborators Modal -->
+    <div class="collab-modal" id="collabModal">
+        <div class="collab-modal-content">
+            <span class="collab-modal-close" id="collabModalClose">&times;</span>
+            <h2 class="collab-modal-title">Meet Our Creators</h2>
+            <p class="collab-modal-text">Discover the talented creators behind Dng God. Learn about their journey, expertise, and contributions to the Free Fire community.</p>
+            <a href="collaborators.html" class="collab-modal-btn">
+                <i class="fas fa-arrow-right"></i> View Creators
+            </a>
+        </div>
+    </div>
 
     <!-- HEADER AD -->
     <div class="ad-container header-ad">
@@ -347,6 +485,7 @@
         <p>&copy; 2025 Dng God. All rights reserved.</p>
         <div class="footer-links">
             <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="https://youtube.com/@dnggod?si=64otld4xcsLrO_Gx" class="youtube-link"><i class="fab fa-youtube"></i> Watch on YouTube</a>
         </div>
     </footer>
     <button class="theme-toggle" aria-label="Toggle theme">
@@ -359,6 +498,7 @@
             handleScrollAnimations();
             initImageTransition();
             setupAdContainers();
+            setupCollaboratorsPopup();
         });
 
         function initImageTransition() {
@@ -475,6 +615,27 @@
             
             // Check on window resize
             window.addEventListener('resize', monitorAds);
+        }
+
+        function setupCollaboratorsPopup() {
+            const popupBtn = document.getElementById('collabPopupBtn');
+            const modal = document.getElementById('collabModal');
+            const closeBtn = document.getElementById('collabModalClose');
+
+            popupBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.classList.add('active');
+            });
+
+            closeBtn.addEventListener('click', function() {
+                modal.classList.remove('active');
+            });
+
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
         }
     </script>
 </body>
