@@ -5,32 +5,12 @@ Allow: /
 # Sitemap location
 Sitemap: https://dnggod.github.io/sitemap.xml
 
-# Allow specific file types
-Allow: /*.html$
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.gif$
-Allow: /*.xml$
-
 # Host directive
 Host: dnggod.github.io
 
-# Crawl-delay
-Crawl-delay: 10
-
-# Prevent AMP validation
+# Google-specific rules
 User-agent: Googlebot
 Allow: /
-Disallow: /amp/
-Disallow: /*amp=1
-Disallow: /*?amp=1
-Disallow: /*?amp=true
-Disallow: /*amp.html
-Disallow: /*amp.htm
-Disallow: /*amp/
-Disallow: /*amp$
 
 # Allow image crawling
 User-agent: Googlebot-Image
@@ -42,16 +22,11 @@ Allow: /*.gif$
 User-agent: Googlebot-Mobile
 Allow: /
 
-# Prevent AMP validation for Mediapartners
+# Allow AdSense
 User-agent: Mediapartners-Google
 Allow: /
-Disallow: /amp/
-Disallow: /*amp=1
 
 # Disallow specific paths (if needed)
 # Disallow: /private/
 # Disallow: /admin/
 # Disallow: /temp/
-
-# Host directive (optional)
-# Host: dnggod.github.io 
