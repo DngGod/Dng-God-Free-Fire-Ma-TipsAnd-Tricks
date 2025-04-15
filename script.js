@@ -1,3 +1,42 @@
+// IAB TCF consent implementation for Google AdSense
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if in EU zone (simplified approach - you may want to use a geo-detection service)
+    const checkEUVisitor = () => {
+        return new Promise((resolve) => {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const euCountries = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB', 'CH', 'NO', 'IS', 'LI'];
+                    resolve(euCountries.includes(data.country_code));
+                })
+                .catch(() => {
+                    // If error, assume it's EU to be safe
+                    resolve(true);
+                });
+        });
+    };
+
+    // Don't load ads until consent is given
+    const adElements = document.querySelectorAll('.adsbygoogle');
+    adElements.forEach(el => {
+        el.style.display = 'none';
+    });
+
+    // Check if we need to show EU consent
+    checkEUVisitor().then(isEUVisitor => {
+        if (isEUVisitor) {
+            // Let AdSense handle the consent through TCF
+            console.log('EU visitor detected, Google AdSense will handle TCF consent');
+        } else {
+            // Not EU, show ads directly
+            adElements.forEach(el => {
+                el.style.display = 'block';
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            });
+        }
+    });
+});
+
 // Theme Toggle Functionality
 function initThemeToggle() {
     // Check for saved theme preference or use the default
